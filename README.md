@@ -26,6 +26,14 @@ An educational XAUUSD application for the **Gold Institutional Trading** methodo
 
 **Maintenance rule:** Do not manually mirror routine Notion edits into this README. Update GitHub when a change affects code, schemas, tests, deployment, security, or another versioned implementation contract.
 
+## Runnable decision journal MVP
+
+A local-first journal application is now available. Run `npm start` with Node.js 20+ and open http://127.0.0.1:3000. Run `npm test` to validate the core scoring and review logic.
+
+Plan a decision → record supporting evidence → submit a locked entry review → reflect on execution → review process trends. Entries stay in browser storage; export backups regularly.
+
+See [MVP setup, implemented features and limits](docs/JOURNAL-MVP.md). This MVP has no live TradingView or AI connection, account sync, or trade execution.
+
 ## Product goal
 Teach traders to classify session context, evaluate **entry quality**, review screenshots, improve execution behaviour, and journal decisions independently of P&L.
 
