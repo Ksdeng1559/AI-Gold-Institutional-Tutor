@@ -90,3 +90,5 @@ The score measures **entry quality, not probability of winning**.
 - **AI Tutor implementation contract:** `docs/AI-TUTOR-SPEC.md`
 - **Entry Quality implementation rubric:** `docs/ENTRY-QUALITY-RUBRIC.md`
 - **Initial content implementation reference:** `docs/CONTENT-BIBLE.md`
+
+- **TradingView connection setup and evidence contract:** [TradingView integration](docs/TRADINGVIEW-INTEGRATION.md)
