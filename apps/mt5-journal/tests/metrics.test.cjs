@@ -1,0 +1,14 @@
+const assert=require('node:assert/strict');
+const {parseCSV,money,day,reviewRows,metrics,arraysIn}=require('../www/journal.js');
+const rows=parseCSV('id,date,net,note\r\n1,2026-10-18,100,"plan, followed"\r\n2,2026-10-18,-50,"two"\r\n3,2026-10-18,0,"flat"');
+assert.equal(rows[0].note,'plan, followed');
+const clean=reviewRows(rows,{id:'id',date:'date',net:'net'},'2026-10-18','2026-10-18');
+const m=metrics(clean);assert.equal(m.net,50);assert.equal(m.winRate,1/3);assert.equal(m.profitFactor,2);assert.equal(m.expectancy,50/3);assert.equal(m.breakevens,1);
+assert.equal(metrics([]).winRate,null);assert.equal(metrics([{net:10}]).profitFactorState,'no losing trades');assert.equal(metrics([{net:-10}]).profitFactor,0);
+assert.throws(()=>reviewRows([...rows,rows[0]],{id:'id',date:'date',net:'net'},'2026-10-18','2026-10-18'),/duplicate/);
+assert.throws(()=>money(''));assert.throws(()=>money('1,000'));assert.throws(()=>money(Infinity));assert.throws(()=>day('2026-02-30'));assert.throws(()=>day('2026-10-18 12:00'));
+assert.equal(day('2026-10-18T02:00:00Z'),'2026-10-17');assert.equal(day('2026-12-18T02:00:00Z'),'2026-12-17');
+assert.equal(reviewRows(rows,{id:'id',date:'date',net:'net'},'2026-10-19','2026-10-20').length,0);
+assert.throws(()=>parseCSV('id,id\n1,2'));assert.throws(()=>parseCSV('id,net\n1,"2'));assert.throws(()=>parseCSV('id,net\n1,2,3'));
+assert.equal(arraysIn({structured:{positions:[{id:1}]}})[0].path,'$.structured.positions');
+console.log('Journal metrics and import checks passed.');

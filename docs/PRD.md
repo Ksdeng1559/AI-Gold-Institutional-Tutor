@@ -192,3 +192,8 @@ Before coding provider-specific integrations, verify: target broker export and t
 - [OpenBB data integration](https://docs.openbb.co/workspace/developers/data-integration)
 
 Private source links may require Dennis's access. Never copy real statements, account identifiers, screenshots, balances, OAuth responses, or private source text into this public repository. Use synthetic fixtures only.
+
+
+## Implementation checkpoint — 18 October 2026
+
+The first runnable slice is [the local MT5 journal](../apps/mt5-journal/README.md). It implements native read-only MCP transport, tool discovery, explicit read arguments, CSV/JSON record review, scoped closed-position net metrics, daily notes/experiment, screenshot previews, evidence export and local SQLite review persistence. The hosted copy supports imports/downloads; direct broker reads require the local service beside MT5. These implementations do not imply that the broader production acceptance criteria above have passed. Actual MT5 account connectivity, browser visual QA, automatic deal reconciliation, continuous sync, cloud financial-record storage, Notion triggers, Discord and AI tutoring remain unverified or unimplemented as described in the app README.
