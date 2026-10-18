@@ -28,11 +28,18 @@ A proposed gold research terminal and trade journal for the **Gold Institutional
 
 **Maintenance rule:** Do not manually mirror routine Notion edits into this README. Update GitHub when a change affects code, schemas, tests, deployment, security, or another versioned implementation contract.
 
-## Proposed next MVP
+## Proposed two application MVP
 
-Build a **Gold Research Terminal and Trade Journal**: fundamental news and market context alongside reviewed statements, screenshots, daily performance analysis, and one measurable improvement for the next session. Bloomberg-style describes the information-dense interface; this project has no Bloomberg affiliation or data rights.
+Build two independently deployable applications in one repository:
+
+1. **Gold Research Terminal and Trade Journal** — web research, uploads, reconciliation, and performance review.
+2. **Discord Gold Tutor** — curated lessons, Q&A, practice, screenshot review, and private journal handoff.
+
+The web application combines fundamental news and market context alongside reviewed statements, screenshots, daily performance analysis, and one measurable improvement for the next session. Bloomberg-style describes the information-dense interface; this project has no Bloomberg affiliation or data rights.
 
 - **Start here:** [Proposed MVP PRD](docs/PRD.md)
+- **Discord application:** [Gold Tutor PRD](docs/DISCORD-GOLD-TUTOR-PRD.md)
+- **Journal-triggered coaching:** [Notion to Tutor workflow](docs/NOTION-TUTOR-TRIGGER.md)
 - **Build sequence:** [Implementation plan](docs/MVP-IMPLEMENTATION-PLAN.md)
 - **Calculation and evidence rules:** [Metrics contract](docs/METRICS-SPEC.md)
 - **Visual reference:** [Terminal wireframe](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site)
@@ -41,6 +48,10 @@ The repository remains documentation-only. The separate wireframe is a local-int
 
 ## Core workflow
 Prepare → Plan → Trade externally → Upload statements and screenshots → Reconcile → Daily analysis → Test one improvement
+
+## Notion to Discord learning loop
+
+Mark a journal entry **Ready for AI Review** → the shared tutor service reviews a versioned evidence snapshot → findings return to Notion → an opted-in linked trader receives a private Discord completion link. Ordinary edits and tutor writeback do not loop into new jobs. This is a proposed integration, not an active automation.
 
 ## Core methodology
 - Asia → London imprint → New York classification
@@ -58,8 +69,9 @@ Prepare → Plan → Trade externally → Upload statements and screenshots → 
 5. Win rate, profit factor, expectancy, and evidence-qualified MAE/MFE.
 6. Daily decision-quality review, rule-adherence coverage, and one measurable experiment.
 7. Existing Notion journal access and optional confirmed export.
+8. Separate Discord tutor for learning, screenshot explanation, and authorized journal handoff.
 
-Start with a durable CSV journal and daily review, then add verified research adapters. No streaming news or automated execution is required. Course delivery, tutor chat, entry-quality scoring, and the Content Bible remain a later roadmap; see the [previous tutor PRD](docs/reference/AI-GOLD-TUTOR-PRD.md).
+Start with a durable CSV journal and daily review, then add verified research adapters. No streaming news or automated execution is required. A focused tutor runs on Discord as a companion MVP. Full course delivery, entry-quality scoring, and the Content Bible remain a later roadmap; see the [previous tutor PRD](docs/reference/AI-GOLD-TUTOR-PRD.md).
 
 ## Future Entry Quality model
 - Location Quality — 20

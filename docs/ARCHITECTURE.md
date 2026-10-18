@@ -1,5 +1,19 @@
 # Architecture — AI Gold Institutional Tutor
 
+## Two independently deployed applications
+
+- apps/terminal-web: research terminal, uploads, journal, reconciliation, and daily analytics.
+- apps/discord-tutor: signature-verified command handler, deferred responses, curated lesson/Q&A and screenshot-review flows.
+- packages/contracts: shared identity, evidence, review, and metric envelopes.
+- packages/tutor-core: reusable grounded tutoring and knowledge retrieval.
+- packages/analytics: deterministic calculations; journal API exposes owner-scoped results.
+
+Use shared knowledge/evidence services and an authorized journal API. Discord handlers do not bypass owner checks with broad database credentials. Verify explicit account linking; public course retrieval cannot include private trading records. No Discord Gateway or privileged message monitoring is required for the proposed HTTP command-only design; validate platform setup at implementation. The [Discord PRD](DISCORD-GOLD-TUTOR-PRD.md) is the companion interface contract. No bot or infrastructure has been deployed.
+
+## Notion event adapter and tutor jobs
+
+The [Notion trigger contract](NOTION-TUTOR-TRIGGER.md) adds verified webhook/polling ingress, a durable request queue, source snapshot builder, tutor worker, versioned Notion writeback, and a private-notification outbox. Only explicit Ready requests trigger jobs. Job identity, canonical-input hashing, per-page leases, and source rechecks prevent duplicates, self-trigger loops, and unlabeled stale results. Bot notifications require verified linking and opt-in; delivery failure cannot expose personal data publicly. Journal metrics remain deterministic and owner scoped.
+
 ## Proposed terminal and journal MVP extension
 
 The next-release scope is proposed in [PRD](PRD.md), with [work packages](MVP-IMPLEMENTATION-PLAN.md) and a [metrics contract](METRICS-SPEC.md). The architecture below originally supported the course/tutor plan; it is a reusable baseline rather than an instruction to build every course service for the terminal MVP.
@@ -26,7 +40,8 @@ Supporting systems:
 ```
 AI-Gold-Institutional-Tutor/
 ├─ apps/
-│  └─ web/
+│  ├─ terminal-web/
+│  └─ discord-tutor/
 ├─ packages/
 │  ├─ tutor-core/
 │  ├─ scoring-engine/

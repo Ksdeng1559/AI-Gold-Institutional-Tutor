@@ -1,14 +1,14 @@
 # Gold Research Terminal and Trade Journal MVP
 
-Version 2.0 proposal · 18 October 2026 · Product owner Dennis Eng
+Version 2.2 proposal · 18 October 2026 · Product owner Dennis Eng
 
 ## 1 Product decision
 
-Propose the next MVP as a gold-focused financial research terminal that also acts as a trade journal. The trader prepares with fundamental news and intermarket context, records a thesis, uploads broker statements and screenshots, reviews actual results, and chooses one measurable improvement for the next session.
+Propose the next MVP as a gold-focused financial research terminal that also acts as a trade journal. The trader prepares with fundamental news and intermarket context, records a thesis, uploads broker statements and screenshots, reviews actual results, and chooses one measurable improvement for the next session. A separate Discord Gold Tutor provides questions, lessons, practice, and screenshot-review conversations through the shared evidence and knowledge services.
 
 The requested Bloomberg-style direction means a compact, connected research workspace. The product name is **Gold Research Terminal**; it has no Bloomberg affiliation, data entitlement, or promise of feature parity.
 
-This proposal replaces the course-first launch sequence in the previous PRD. The broader course, AI tutor, scoring research, and Content Bible remain valid future work; the original PRD is preserved at [AI Gold Tutor reference](reference/AI-GOLD-TUTOR-PRD.md). Existing methodology stays in the [living Notion plan](https://app.notion.com/p/3e19e94cf0a4819bbabcd5b00f722bf7). This document versions the proposed implementation scope, not a new trading strategy. Dennis's current request takes precedence over the earlier launch order.
+This proposal replaces the course-first launch sequence in the previous PRD. The Discord Tutor is a companion MVP, while full course delivery, scoring research, and the Content Bible remain later work; the original PRD is preserved at [AI Gold Tutor reference](reference/AI-GOLD-TUTOR-PRD.md). Existing methodology stays in the [living Notion plan](https://app.notion.com/p/3e19e94cf0a4819bbabcd5b00f722bf7). This document versions the proposed implementation scope, not a new trading strategy. Dennis's current request takes precedence over the earlier launch order.
 
 ## 2 Current state and evidence
 
@@ -37,12 +37,28 @@ Core loop:
 | Imports | CSV plus PDF/PNG/JPEG evidence; reviewed extraction and reconciliation | Unbounded broker-format support and video capture |
 | Analysis | Win rate, net P/L, profit factor, expectancy, known process adherence | Automatically inferred behavioural labels |
 | Excursions | Eligibility and explicit missing-data states; validated path calculation when supported | Universal exact MAE/MFE across all feeds and scaled positions |
-| Daily review | Evidence-linked findings and one measurable improvement experiment | Full autonomous tutor, courses and entry-quality scoring |
+| Daily review | Evidence-linked findings and one measurable improvement experiment | Full courses and automatic entry-quality scoring |
+| Discord Gold Tutor | Curated Q&A, lessons, practice, screenshot review, and private journal handoff in a separate deployable | Voice, ambient channel monitoring, automated broadcasts |
 | Notion | Existing journal links, manual evidence export; optional confirmed write after validation | Automatic bidirectional synchronization |
 
 Automatic trade calls, orders, risk increases to meet income goals, and promises of profitable outcomes are excluded. No streaming feed is required. Delayed, timestamped news is sufficient.
 
-## 5 Screens and workflow
+## 5 Two applications and shared services
+
+| Application | Primary experience | Deployment boundary |
+|---|---|---|
+| Gold Research Terminal | Web research, market/news context, private uploads, journal, reconciliation, metrics, and daily review | apps/terminal-web |
+| Gold Tutor on Discord | Command-driven questions, curated lessons, practice, screenshot explanations, and private journal discussion | apps/discord-tutor |
+
+Start in this repository as a monorepo with two independently deployed apps, shared contracts, a curated knowledge service, private evidence service, and an authorized journal/metrics API. This is not a request to fork repositories or provision services. Identity linking is explicit; Discord roles or display names do not grant access to trading records. Tutor failures must not disable the web journal.
+
+The companion [Discord Tutor PRD](DISCORD-GOLD-TUTOR-PRD.md) defines commands, delivery, private-data boundaries, and rollout. Web journal import/reconciliation remains authoritative for financial records; Discord explains approved metrics and cannot infer fills or approve statement extraction.
+
+### Notion initiated tutor service
+
+The Notion journal is an event source for explicit review requests. Ready for AI Review → verified adapter and durable queue → shared tutor service → validated review written to Notion → optional private Discord completion notification → follow-up coaching. The [trigger contract](NOTION-TUTOR-TRIGGER.md) defines schema additions, ownership, evidence gates, source versions, idempotency, loop prevention, and delivery failure states. Nothing is activated by the documentation change.
+
+## 6 Screens and workflow
 
 Preserve the wireframe's ten-view navigation: Overview, News and catalysts, BTC and Crypto, Intermarket monitor, Reports library, Price references, My briefing, Imports and analytics, Daily trade analysis, Data connections. Include a clear route to the journal from review screens; journal entities are part of the application, not another market-analysis tab.
 
@@ -86,7 +102,7 @@ Show BTC with exact spot pair/venue and defined rolling 24-hour change. Keep BTC
 
 An on-demand weekend digest begins at Friday 16:00 America/New_York and ends at its explicit cutoff; this is an editorial window. Closed traditional markets display last available observations. Do not manufacture weekend gold/DXY correlations by forward-filling prices. No external reminder or background message is created by this feature.
 
-## 6 Data strategy and source gates
+## 7 Data strategy and source gates
 
 TradingView MCP is a candidate for quotes, bars, news, and calendar information after authorized capability tests. Follow [TradingView integration](TRADINGVIEW-INTEGRATION.md). An assistant's connection is not automatically a website credential, and a local Desktop bridge is not automatically reachable by a hosted app. No tokens/cookies in source control. Use the actual discovered tool schema; never guess symbol identifiers.
 
@@ -98,7 +114,7 @@ Use bounded batched quote requests, proposed 60-second refresh when open and per
 
 OpenBB remains an optional research surface over the same normalized API through widget/app definitions. It is not a mandatory frontend or an all-in-one free feed. Do not maintain a duplicate data pipeline.
 
-## 7 Reference conventions
+## 8 Reference conventions
 
 - Gold instrument: explicitly choose XAUUSD broker/feed; GC futures is a separate series. Never transfer prices or volume silently across them.
 - Daily open: first valid bar open at/after midnight America/New_York within a configured five-minute tolerance; disclose the actual timestamp. This differs from the futures evening open.
@@ -108,7 +124,7 @@ OpenBB remains an optional research surface over the same normalized API through
 
 Reference slots may be unavailable when evidence is insufficient. Releasing a useful journal does not authorize calling missing VWAP or MAE/MFE implemented. Full-reference acceptance requires validated sources and complete history.
 
-## 8 Architecture and records
+## 9 Architecture and records
 
 Use the existing Next.js/TypeScript direction, an authenticated API, PostgreSQL, private object storage, background parsing/ingestion jobs, deterministic analytics, and a structured AI review service. Begin with the existing deployment conventions after validating them. Python/FastAPI is optional for provider/analytics workers if justified; do not require a second stack for simple calculations.
 
@@ -118,13 +134,13 @@ All records and downloads enforce owner access. Source timestamps and corrected 
 
 Snapshots link input record IDs, calculation/rubric/model versions, cutoff, scope, and quality. New corrected imports invalidate freshness, not historical approvals. Recompute into a new version. Export one selected review to Notion only after user confirmation and use idempotency keys; no automatic overwrites or duplicate ledgers.
 
-## 9 AI contract
+## 10 AI contract
 
 A briefing separates facts, observed market response, interpretation, competing explanations, catalysts, and gaps. Every factual claim links to source evidence available by the cutoff. A publication time is not replaced by retrieval time.
 
 A daily review uses deterministic metrics plus saved plans, screenshots, and user-confirmed assessments. It cannot infer hidden institutional intent, emotions, missed profits, exact excursions, or trade grouping without evidence. Missing evidence remains unknown. Entry Quality and Behaviour scoring in the existing tutor contracts are future modules, separate from current adherence; adherence is not a probability of winning.
 
-## 10 Delivery slices and release gates
+## 11 Delivery slices and release gates
 
 | Slice | Deliverable | Exit gate |
 |---|---|---|
@@ -133,9 +149,9 @@ A daily review uses deterministic metrics plus saved plans, screenshots, and use
 | C Research context | Gold/DXY core references, delayed regional news/calendar, oil/rates context, BTC desk | Actual authorized calls and quality states verified; source gaps disclosed |
 | D Evidence enrichment | PDF/image extraction review, eligible price-path excursions, optional Notion export | Human review, matching-path evidence, idempotent writes verified |
 
-A+B form the first usable journal increment. C completes the proposed terminal-plus-journal MVP. D is staged enrichment: accept all supported evidence formats in A but do not block a useful CSV journal on universal OCR or price-path support. VWAP and excursion status must remain honest until their gates pass. The [implementation plan](MVP-IMPLEMENTATION-PLAN.md) defines executable work packages.
+A+B form the first usable journal increment. C completes the proposed terminal-plus-journal MVP. D is staged enrichment: accept all supported evidence formats in A but do not block a useful CSV journal on universal OCR or price-path support. VWAP and excursion status must remain honest until their gates pass. The [implementation plan](MVP-IMPLEMENTATION-PLAN.md) defines executable work packages. Build the Discord educational slice alongside these stages; private daily-review retrieval depends on the authorized journal API. Separate deployment gates prevent the bot from blocking the first usable web journal.
 
-## 11 Acceptance and validation
+## 12 Acceptance and validation
 
 - Persist a confirmed trade idea and uploaded evidence across authenticated reloads; another user cannot access them.
 - Reimport identical and overlapping statements without double-counting; distinguish cash flows, open positions, executions, and completed ideas.
@@ -148,13 +164,17 @@ A+B form the first usable journal increment. C completes the proposed terminal-p
 - Complete browser QA for desktop/mobile, keyboard navigation, empty/loading/error states, uploads/review, and evidence/source drawers before release.
 - Do not claim implementation from a static preview, provider documentation, or an untested connector setup.
 
-## 12 Pilot and open decisions
+## 13 Pilot and open decisions
 
 Pilot with ten reviewed trading sessions plus a weekend scenario. Targets: useful preparation in five minutes; all factual claims traceable; all computed values reproducible; no duplicate confirmed fills; daily review completed for at least eight pilot sessions; one measurable experiment tracked through evaluation. Report sample counts and missing coverage with any performance trend.
 
 Before coding provider-specific integrations, verify: target broker export and timestamp convention; account currency; XAUUSD/DXY/BTC sources; volume and full-week history; permitted TradingView deployment; news/report display rights; object storage/auth choices; cost budget; and Notion schema. None of these is established by this proposal. They do not block fixtures and provider-independent journal contracts.
 
 ## References
+
+- [Notion journal tutor trigger](NOTION-TUTOR-TRIGGER.md)
+
+- [Discord Gold Tutor MVP](DISCORD-GOLD-TUTOR-PRD.md)
 
 - [Visual wireframe](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site)
 - [Metrics and evidence contract](METRICS-SPEC.md)

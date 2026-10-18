@@ -2,6 +2,12 @@
 
 Status: proposed work packages, not completed features. Read [PRD](PRD.md), [metrics contract](METRICS-SPEC.md), and [TradingView evidence contract](TRADINGVIEW-INTEGRATION.md) first. Existing course and entry-quality contracts apply only to their later modules. Do not promote a local-only preview into a production claim.
 
+## Two application delivery
+
+Build apps/terminal-web and apps/discord-tutor as separate deployables in this repository. Follow the [Discord Gold Tutor PRD](DISCORD-GOLD-TUTOR-PRD.md). Share contracts and services; keep deployment secrets and health checks separate. Do not register/install a bot or send Discord messages as part of documentation work.
+
+The Discord teaching slice can progress with curated knowledge while the web import workflow is built. Private journal discussion depends on verified identity linking and the owner-scoped journal API. Never make web-journal availability depend on Discord health.
+
 ## 1 Start with repository and capability validation
 
 This repository currently has documentation only. Choose and record the initial framework/auth/database/storage implementations before scaffolding. Follow existing Next.js/TypeScript direction unless a material blocker justifies a documented alternative. Use PostgreSQL and private object storage behind explicit owner authorization. No credentials or real trading records belong in Git.
@@ -21,6 +27,8 @@ Resolve one representative broker CSV shape and timezone/cost semantics. Maintai
 | WP07 Gold references and BTC | Daily open/pivots, validated VWAP slots, BTC desk and weekend review | WP06 | No silent feed substitutions; full-week coverage or honest gaps |
 | WP08 Structured extraction | Text-PDF/OCR adapters, per-field confidence review, evidence linkage | WP02/03 | Human-reviewed extraction; unreadable/ambiguous inputs remain unresolved |
 | WP09 Evidence-backed analysis | Structured AI brief/review with deterministic validation and source IDs | WP05/06 | Unsupported claims rejected; model cannot overwrite broker facts |
+| WP11 Discord Gold Tutor | Command endpoint, curated lessons/Q&A, screenshot review, privacy-safe journal handoff | Shared knowledge/evidence; WP05 for private daily review | Signature, deadline, duplicate, linking and ownership tests in Discord PRD pass |
+| WP12 Notion-triggered tutor | Verified Ready-state adapter, idempotent queue, versioned writeback and private notification outbox | WP05/09/11 plus Notion access and schema validation | TRIG01–TRIG10 pass; no self-trigger loops or public fallback |
 | WP10 Optional enrichments | Matched-path excursions, confirmed Notion export, OpenBB surface | Separate access gates | Method/coverage verified; writes idempotent; same normalized contracts |
 
 WP01–05 deliver the first usable journal. WP06–07 add the terminal experience. WP08–10 can be staged, with limitations explicit. Do not delay reconciled CSV analysis for universal OCR, streaming news, full course content, or exact excursions for every broker.
@@ -34,6 +42,7 @@ WP01–05 deliver the first usable journal. WP06–07 add the terminal experienc
 - Research adapters: quote/bar/news/calendar/report interfaces; no provider-specific fields leaking into core journal logic.
 - AI: structured explanations with source validation; no broker write tools.
 - Notion: one-way confirmed export initially; retain destination mapping and idempotency; no bidirectional sync.
+- Discord: bounded command/response adapter over shared tutor and journal contracts; no ambient server monitoring or unsolicited messages.
 
 Prefer the simplest deployable architecture with one source of truth for normalized calculations. Add Python workers only for justified library/provider needs. OpenBB is optional and uses the same API. Keep credentials in server-managed secrets and tokens revocable; never expose a local Desktop debugging endpoint.
 
@@ -55,7 +64,7 @@ Each implementation PR defines request/response types and migrations. Untrusted 
 
 Test pure financial calculations with the listed fixtures, then adapters with synthetic broker exports and missing-field/duplicate/correction cases. Validate authorization on both records and original-file downloads. Use a fake provider for outage/rate-limit/expiry tests and an actual authorized call for capability validation.
 
-End-to-end acceptance path: create a Session/Idea → upload a synthetic statement and screenshot → map/reconcile/confirm → calculate metrics → record evidence-backed daily review → choose one experiment → reload durable state → export explicitly to Notion if configured. Verify revoked credentials stop future provider jobs. No automated orders or messages.
+End-to-end acceptance path: create a Session/Idea → upload a synthetic statement and screenshot → map/reconcile/confirm → calculate metrics → record evidence-backed daily review → choose one experiment → reload durable state → export explicitly to Notion if configured. Verify revoked credentials stop future provider jobs. No automated orders or general broadcasts. The explicitly requested, opt-in Notion tutor-completion notification is tested separately under [NOTION-TUTOR-TRIGGER](NOTION-TUTOR-TRIGGER.md).
 
 Browser QA is required for the built app: desktop/mobile, keyboard operation, readable tables, error and loading states, original-file preview, duplicate resolution, and draft approval. Check that unknown data never becomes zero or assumed adherence.
 
