@@ -29,6 +29,7 @@ Resolve one representative broker CSV shape and timezone/cost semantics. Maintai
 | WP09 Evidence-backed analysis | Structured AI brief/review with deterministic validation and source IDs | WP05/06 | Unsupported claims rejected; model cannot overwrite broker facts |
 | WP11 Discord Gold Tutor | Command endpoint, curated lessons/Q&A, screenshot review, privacy-safe journal handoff | Shared knowledge/evidence; WP05 for private daily review | Signature, deadline, duplicate, linking and ownership tests in Discord PRD pass |
 | WP12 Notion-triggered tutor | Verified Ready-state adapter, idempotent queue, versioned writeback and private notification outbox | WP05/09/11 plus Notion access and schema validation | TRIG01–TRIG10 pass; no self-trigger loops or public fallback |
+| WP13 MT5 read-only broker data | Local/Windows VPS collector, authenticated ingestion, execution reconciliation, matched-history eligibility | WP03/04 plus actual host/account validation | MT501–MT510 pass; no trade operations exposed |
 | WP10 Optional enrichments | Matched-path excursions, confirmed Notion export, OpenBB surface | Separate access gates | Method/coverage verified; writes idempotent; same normalized contracts |
 
 WP01–05 deliver the first usable journal. WP06–07 add the terminal experience. WP08–10 can be staged, with limitations explicit. Do not delay reconciled CSV analysis for universal OCR, streaming news, full course content, or exact excursions for every broker.

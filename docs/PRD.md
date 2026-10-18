@@ -1,6 +1,6 @@
 # Gold Research Terminal and Trade Journal MVP
 
-Version 2.2 proposal · 18 October 2026 · Product owner Dennis Eng
+Version 2.3 proposal · 18 October 2026 · Product owner Dennis Eng
 
 ## 1 Product decision
 
@@ -35,6 +35,7 @@ Core loop:
 | BTC and Crypto | BTC reference, focused news, on-demand weekend digest | Altcoin trading, on-chain and liquidation platforms |
 | Journal | Sessions, ideas, fills, planned risk, screenshots, immutable thesis snapshots | Broker execution and continuous account control |
 | Imports | CSV plus PDF/PNG/JPEG evidence; reviewed extraction and reconciliation | Unbounded broker-format support and video capture |
+| MT5 data adapter | Optional read-only collector for broker quotes, positions, fills/history, and eligible tick paths | Order execution, trade copying, universal broker coverage |
 | Analysis | Win rate, net P/L, profit factor, expectancy, known process adherence | Automatically inferred behavioural labels |
 | Excursions | Eligibility and explicit missing-data states; validated path calculation when supported | Universal exact MAE/MFE across all feeds and scaled positions |
 | Daily review | Evidence-linked findings and one measurable improvement experiment | Full courses and automatic entry-quality scoring |
@@ -114,6 +115,10 @@ Use bounded batched quote requests, proposed 60-second refresh when open and per
 
 OpenBB remains an optional research surface over the same normalized API through widget/app definitions. It is not a mandatory frontend or an all-in-one free feed. Do not maintain a duplicate data pipeline.
 
+### MT5 broker data
+
+Add the optional [read-only MT5 adapter](MT5-DATA-INTEGRATION.md) on a verified Windows desktop/VPS running an authorized terminal. It supplies normalized broker observations and candidate executions through outbound authenticated ingestion. Prefer investor access, isolate credentials on the collector host, preserve partial-close/deal identity, and reconcile uploaded statements against synchronized records. Account/quote updates do not trigger the tutor; the explicit Notion review request remains the analysis gate. MT5 tick/bar availability can improve MAE/MFE evidence but does not guarantee exact measurements or centralized-volume VWAP.
+
 ## 8 Reference conventions
 
 - Gold instrument: explicitly choose XAUUSD broker/feed; GC futures is a separate series. Never transfer prices or volume silently across them.
@@ -173,6 +178,7 @@ Before coding provider-specific integrations, verify: target broker export and t
 ## References
 
 - [Notion journal tutor trigger](NOTION-TUTOR-TRIGGER.md)
+- [Read-only MT5 broker data](MT5-DATA-INTEGRATION.md)
 
 - [Discord Gold Tutor MVP](DISCORD-GOLD-TUTOR-PRD.md)
 

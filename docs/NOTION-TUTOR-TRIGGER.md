@@ -76,6 +76,10 @@ A Notion-triggered background job has no fresh Discord interaction token. Use th
 
 If DMs are blocked or the user unlinks/revokes notifications, retain the completed Notion/web review and show notification failure or suppression. Never fall back to a public channel. Deduplicate with request ID + destination + completion version. Account linking, notification delivery, and tutor jobs have independently observable states.
 
+## MT5 data as evidence
+
+The optional [MT5 collector](MT5-DATA-INTEGRATION.md) supplies reconciled executions and eligible broker-matched price history to the shared journal. New positions, deals, and ticks do not create tutor jobs themselves. A Ready request snapshots the relevant metric/evidence versions; missing history still prevents exact MAE/MFE. This keeps collection and coaching as separate lifecycles.
+
 ## 8 Output contract
 
 Review result: request ID, source page ID, owner, review type, source snapshot/version, evidence cutoff, metric-run ID if any, observed facts, uncertainty, supported findings, best disciplined decision, one issue to investigate, one measurable experiment, model/prompt/methodology versions, approval state, completed time, and durable review URL.

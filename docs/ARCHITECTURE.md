@@ -10,6 +10,10 @@
 
 Use shared knowledge/evidence services and an authorized journal API. Discord handlers do not bypass owner checks with broad database credentials. Verify explicit account linking; public course retrieval cannot include private trading records. No Discord Gateway or privileged message monitoring is required for the proposed HTTP command-only design; validate platform setup at implementation. The [Discord PRD](DISCORD-GOLD-TUTOR-PRD.md) is the companion interface contract. No bot or infrastructure has been deployed.
 
+## Optional MT5 collector
+
+The [MT5 data contract](MT5-DATA-INTEGRATION.md) adds a read-only collector on a verified Windows PC/VPS with an authorized MT5 terminal. Outbound authenticated ingestion normalizes account state, quotes, positions, and execution/history evidence; broker credentials stay on the collector. The cloud journal and Discord service do not control the terminal. Preserve execution identity, account mode, timestamps, volume classification, and coverage. Block all order operations. MT5 updates do not independently request tutor jobs.
+
 ## Notion event adapter and tutor jobs
 
 The [Notion trigger contract](NOTION-TUTOR-TRIGGER.md) adds verified webhook/polling ingress, a durable request queue, source snapshot builder, tutor worker, versioned Notion writeback, and a private-notification outbox. Only explicit Ready requests trigger jobs. Job identity, canonical-input hashing, per-page leases, and source rechecks prevent duplicates, self-trigger loops, and unlabeled stale results. Bot notifications require verified linking and opt-in; delivery failure cannot expose personal data publicly. Journal metrics remain deterministic and owner scoped.

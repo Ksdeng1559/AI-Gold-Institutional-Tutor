@@ -39,6 +39,7 @@ The web application combines fundamental news and market context alongside revie
 
 - **Start here:** [Proposed MVP PRD](docs/PRD.md)
 - **Discord application:** [Gold Tutor PRD](docs/DISCORD-GOLD-TUTOR-PRD.md)
+- **Broker data:** [Read-only MT5 integration](docs/MT5-DATA-INTEGRATION.md)
 - **Journal-triggered coaching:** [Notion to Tutor workflow](docs/NOTION-TUTOR-TRIGGER.md)
 - **Build sequence:** [Implementation plan](docs/MVP-IMPLEMENTATION-PLAN.md)
 - **Calculation and evidence rules:** [Metrics contract](docs/METRICS-SPEC.md)
@@ -70,6 +71,7 @@ Mark a journal entry **Ready for AI Review** → the shared tutor service review
 6. Daily decision-quality review, rule-adherence coverage, and one measurable experiment.
 7. Existing Notion journal access and optional confirmed export.
 8. Separate Discord tutor for learning, screenshot explanation, and authorized journal handoff.
+9. Optional read-only MT5 collector for broker quotes, positions, executions, and matched historical-path evidence.
 
 Start with a durable CSV journal and daily review, then add verified research adapters. No streaming news or automated execution is required. A focused tutor runs on Discord as a companion MVP. Full course delivery, entry-quality scoring, and the Content Bible remain a later roadmap; see the [previous tutor PRD](docs/reference/AI-GOLD-TUTOR-PRD.md).
 
