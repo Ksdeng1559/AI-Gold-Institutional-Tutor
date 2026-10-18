@@ -1,6 +1,6 @@
 # MetaTrader 5 Read Only Data Integration
 
-Proposal v1 · 18 October 2026 · [Terminal MVP](PRD.md)
+Proposal v1.1 · 18 October 2026 · [Terminal MVP](PRD.md)
 
 ## 1 Purpose and scope
 
@@ -9,6 +9,12 @@ Add MT5 as a broker-connected data source for the web terminal and journal. Retr
 This integration is read-only. It does not place, modify, cancel, close, or copy trades; change stops; enable trading agents; or give the Discord Tutor trading permissions. Live trading data means data about the broker account and markets, not automated live trading.
 
 ## 2 Recommended deployment
+
+For the first journal demo, use MT5's native terminal MCP from a client running on the same PC as MT5. Follow [Native MCP journal demo](MT5-MCP-DEMO.md). This avoids requiring a Python collector for the first account/history snapshot. Native MCP does not by itself implement hosted ingestion, deduplication, Notion synchronization, or a continuous journal feed. Verify the actual exposed tools and restrict access to data reads; the server also exposes trade operations.
+
+The terminal endpoint (normally `http://127.0.0.1:22346/mcp`) supplies broker account data. The separate `https://www.metatrader.com/mcp` endpoint supplies external market data/news and is not a substitute for terminal account history. A cloud chat cannot reach the user's loopback address. Keep the terminal local rather than exposing its port publicly.
+
+For ongoing application ingestion, the Python collector below remains an implementation option; a native-MCP adapter can implement the same normalized ingestion contract after capability and permission validation.
 
 Use a small collector on the user's Windows PC or a dedicated Windows VPS running an authorized MT5 terminal. The official MetaTrader5 Python package communicates with a terminal; it is not a general browser or independent public REST service. Choose a currently supported compatible Python/package combination and verify it on the actual host. Current package artifacts include Windows x86-64 wheels.
 
@@ -92,6 +98,8 @@ No arbitrary command execution or MT5 function names are accepted over the colle
 ## Sources and implementation gates
 
 Official references checked on 18 October 2026:
+- https://www.metatrader5.com/en/terminal/help/mcp_and_ai/configuration
+- https://www.metatrader5.com/en/terminal/help/mcp_and_ai/capabilities
 - https://www.mql5.com/en/docs/python_metatrader5
 - https://www.mql5.com/en/docs/python_metatrader5/mt5historydealsget_py
 - https://www.mql5.com/en/docs/python_metatrader5/mt5copyticksrange_py
