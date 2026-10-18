@@ -1,6 +1,6 @@
 # Gold Research Terminal and Trade Journal MVP
 
-Version 2.4 proposal · 18 October 2026 · Product owner Dennis Eng
+Version 2.5 proposal · 18 October 2026 · Product owner Dennis Eng
 
 ## 1 Product decision
 
@@ -16,7 +16,7 @@ This branch includes the runnable [local MT5 journal](../apps/mt5-journal/README
 
 The separate private [research dashboard](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site) now serves source-linked news snapshots and Asia/London/New York Session Briefings through shared persistent news storage. Its initial eight stories were sourced directly from Reuters, World Gold Council, BLS, Barron's/Dow Jones and WSJ/Dow Jones. They were not supplied by OpenBB, Marketaux, Eulerpool or MT5. Shared news write/readback was verified, and three pre-session cloud tasks were saved and enabled; scheduled execution has not yet been verified. The Sites-hosted implementation has a separate source repository and is not automatically reproduced by this GitHub checkout.
 
-OpenBB has not been installed or connected. Marketaux's attempted workspace request returned HTTP 403 without establishing its cause; Eulerpool account/provider access is unverified. Price/reference feeds, exact MAE/MFE, cloud financial-record ingestion, automated AI coaching, Notion sync and the Discord application remain unimplemented or unverified. Browser visual QA remains unavailable. The dashboard is not OpenBB Workspace or a production-complete terminal.
+OpenBB has not been installed or connected. Marketaux's attempted workspace request returned HTTP 403 without establishing its cause; Eulerpool account/provider access is unverified. MT5 execution/reference feeds, exact MAE/MFE, cloud financial-record ingestion, automated AI coaching, Notion sync and the Discord application remain unimplemented or unverified. Browser visual QA remains unavailable. The dashboard is not OpenBB Workspace or a production-complete terminal.
 
 ## 3 First user and outcome
 
@@ -116,6 +116,17 @@ News and Session Briefings refresh before Dennis's ICT windows, replacing the ea
 Each run researches source-backed news, preserves publication/report periods, writes a session-specific briefing with its own preparation time and news cutoff, retains other sessions, and verifies readback without republishing the app. On failure, retain the last successful content and its true timestamp. Filters reuse cached data. Marketaux remains a candidate adapter, with account entitlements, limits and display rights checked before activation. Limited results must never be described as exhaustive coverage.
 
 Use bounded batched quote requests, proposed 60-second refresh when open and permitted. Track unavailable, disconnected, stale, delayed, partial, and closed-market states separately. Slower reports retain observation/reporting periods and publication dates. A no-new-stories response can be a successful feed check.
+
+
+### Alpha Vantage research references
+
+The authorized Alpha Vantage MCP connection was tested successfully on 18 October 2026 and five observations were saved and read back from the private dashboard: gold XAUUSD, BTC/USD, daily WTI, daily Brent and the nominal US 10-year Treasury constant maturity rate. They now populate the market snapshot, ticker and Session Briefing reference cards. This is a connector-published shared snapshot, not a browser-side provider connection or an MT5 execution feed. No provider secret is stored in dashboard code.
+
+Each observation retains instrument, unit, provider function, raw observation date/time, timezone (including unspecified), actual retrieval time, reference type and limitations. Gold's returned timezone was unspecified and must remain so. Oil series are daily published EIA/FRED observations with lag, not futures quotes; the nominal yield is not the TIPS real yield. No cross-market change or correlation is derived from unmatched snapshots. News and saved briefing cutoffs remain independent of market-data refreshes.
+
+The three existing pre-session tasks now include bounded sequential Alpha Vantage calls: gold and BTC per run; oil and yield only when the previous retrieval exceeds 24 hours. The connection returned a 25-request daily limit and one-request-per-second pacing requirement. Maximum five calls per run; no retries on rate limits. A provider data-level error counts as failure even when the MCP call itself succeeds. Retain prior dated observations on failure. Scheduled execution remains to be observed.
+
+DXY, daily open, automatic pivots, daily/weekly VWAP, execution quotes and exact MAE/MFE remain separate evidence gates. The tested reference endpoints do not provide the complete session OHLCV/tick history needed to satisfy them. See [Alpha Vantage integration](ALPHA-VANTAGE-INTEGRATION.md).
 
 ### OpenBB research backend
 
