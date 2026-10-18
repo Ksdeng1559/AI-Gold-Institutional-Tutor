@@ -74,3 +74,14 @@ The V5 standalone wireframe is a visual reference only. It does not satisfy dura
 ## 6 Handoff requirements for Codex or Claude Code
 
 Deliver small reviewable implementation changes. Keep completed work, unverified integrations, and deferred work distinct in each PR. Include migration and rollback notes where relevant, synthetic fixtures, meaningful tests, setup instructions without secrets, and observed checks. Do not copy real statements or private Notion page contents into this public repository. Do not change the trader's methodology, risk rules, or scoring rubrics merely to make a test pass.
+
+
+## OpenBB research increment and session delivery — 18 October 2026
+
+1. Inventory the current V5 provider packages and schemas; select/pin a minimal compatible set. Record each dataset, original provider, access method, entitlement, required key, rights, cadence and unresolved gaps.
+2. Validate bounded official macro/rates and gold CFTC reads. Compare source periods, units and revisions against original releases; retain the latest available observation without implying live data. Do not assume calendar, DXY or gold-market access follows from installing OpenBB.
+3. Implement the separately hosted Python research service, owner-authorized read/job interface, normalized lineage, shared cache and provider quota/failure handling. The Sites Worker remains a client; simple journal analytics remain independent.
+4. Attach frozen research observations to the existing pre-session briefings. Reuse enabled Asia/London/New York tasks and verify one actual end-to-end run, timezone/date selection, source links, partial failures and readback. Preserve unknown chart/reference fields and prior session versions.
+5. Add calendar and reference instruments only after source/permission tests. Optional research MCP or OpenBB Workspace consumes the same service. No order routes, automatic Notion tutoring or provider credential exposure.
+
+Exit gates: OBB01–OBB08 in [the research contract](OPENBB-RESEARCH-INTEGRATION.md). No implementation or deployment is implied by this plan. Browser QA, actual MT5 access, and scheduled run completion remain separate release gates.

@@ -39,6 +39,7 @@ The web application combines fundamental news and market context alongside revie
 
 - **Start here:** [Proposed MVP PRD](docs/PRD.md)
 - **Discord application:** [Gold Tutor PRD](docs/DISCORD-GOLD-TUTOR-PRD.md)
+- **Research backend:** [OpenBB integration and provider gates](docs/OPENBB-RESEARCH-INTEGRATION.md)
 - **Broker data:** [Read-only MT5 integration](docs/MT5-DATA-INTEGRATION.md)
 - **Journal-triggered coaching:** [Notion to Tutor workflow](docs/NOTION-TUTOR-TRIGGER.md)
 - **Build sequence:** [Implementation plan](docs/MVP-IMPLEMENTATION-PLAN.md)
@@ -49,7 +50,7 @@ The web application combines fundamental news and market context alongside revie
 
 The first implementation is available at [apps/mt5-journal](apps/mt5-journal/README.md): a local Python web service with native MT5 MCP reads, statement imports, reviewed completed-position metrics, screenshot previews and SQLite daily reviews. Run it on the same PC as MT5. The service restricts access to six data-read tools and keeps the terminal key out of browser code. Actual broker connectivity still requires the local setup and verification described there.
 
-The [hosted journal interface](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site/journal.html) supports imports and evidence downloads. It cannot access a desktop loopback endpoint. The research terminal remains a visual preview with unconnected market providers; Notion/Discord automation is not active. [Marketaux news snapshots](docs/MARKETAUX-NEWS-INTEGRATION.md) are a separate one-shot adapter with provider access still unverified.
+The [hosted journal interface](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site/journal.html) supports imports and evidence downloads. It cannot access a desktop loopback endpoint. The separate research dashboard now has source-linked news snapshots, saved Session Briefings and three enabled pre-session update schedules. Actual scheduled runs and browser visual QA remain unverified. OpenBB is a planned research backend and is not connected; market-price providers and Notion/Discord automation remain unconnected. [Marketaux news snapshots](docs/MARKETAUX-NEWS-INTEGRATION.md) are a separate one-shot adapter with provider access still unverified.
 
 ## Core workflow
 Prepare → Plan → Trade externally → Upload statements and screenshots → Reconcile → Daily analysis → Test one improvement

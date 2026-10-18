@@ -142,3 +142,10 @@ Recommended first deployment:
 - environment variables for model/API keys
 - CI tests for schema and score validation
 
+
+
+## OpenBB research backend decision — 18 October 2026
+
+The v2.4 PRD places OpenBB ODP behind the existing dashboard as a planned provider integration layer, not a frontend replacement. A separately hosted, version-pinned Python research service exposes authenticated reads/jobs for macro, rates, positioning and eligible market data. The Sites Worker continues serving the interface and shared news/briefings; it does not import Python OpenBB packages. Broker fills/account state stay in the read-only local MT5 adapter and deterministic journal service. No market-research endpoint may invoke broker trading operations.
+
+Provider adapters → normalized observations and cache → versioned session evidence → web terminal / tutor. News retains original publisher attribution. Optional OpenBB Workspace and research MCP reuse this service rather than creating another ledger or cache. API keys remain server-side; entitlements, freshness, revisions, exact series/instruments and coverage are checked per dataset. The [OpenBB integration contract](OPENBB-RESEARCH-INTEGRATION.md) defines records and release gates. This is a design decision, not evidence that OpenBB is deployed.

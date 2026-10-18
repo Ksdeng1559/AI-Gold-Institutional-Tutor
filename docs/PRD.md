@@ -1,6 +1,6 @@
 # Gold Research Terminal and Trade Journal MVP
 
-Version 2.3 proposal · 18 October 2026 · Product owner Dennis Eng
+Version 2.4 proposal · 18 October 2026 · Product owner Dennis Eng
 
 ## 1 Product decision
 
@@ -12,9 +12,11 @@ This proposal replaces the course-first launch sequence in the previous PRD. The
 
 ## 2 Current state and evidence
 
-This repository contains planning documents, not an implemented production app. The separate [V5 visual wireframe](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site) demonstrates ten views, blank market references, regional and crypto coverage templates, local evidence selection, reviewed CSV net-result calculations, and daily review drafts.
+This branch includes the runnable [local MT5 journal](../apps/mt5-journal/README.md): native MCP read transport, CSV/JSON review, deterministic completed-position metrics, SQLite daily reviews and evidence export. Actual broker-account connectivity remains unverified; the hosted interface cannot reach a desktop loopback endpoint.
 
-The wireframe is not OpenBB Workspace and is not a deployed version of this repository. Local CSV metrics are a prototype, not broker reconciliation. Browser visual QA was unavailable during its creation. No market/news feed, historical-path service, secure cloud upload pipeline, automatic AI coaching, or Notion synchronization has been verified as connected. Build and test those capabilities before describing the app as production-ready.
+The separate private [research dashboard](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site) now serves source-linked news snapshots and Asia/London/New York Session Briefings through shared persistent news storage. Its initial eight stories were sourced directly from Reuters, World Gold Council, BLS, Barron's/Dow Jones and WSJ/Dow Jones. They were not supplied by OpenBB, Marketaux, Eulerpool or MT5. Shared news write/readback was verified, and three pre-session cloud tasks were saved and enabled; scheduled execution has not yet been verified. The Sites-hosted implementation has a separate source repository and is not automatically reproduced by this GitHub checkout.
+
+OpenBB has not been installed or connected. Marketaux's attempted workspace request returned HTTP 403 without establishing its cause; Eulerpool account/provider access is unverified. Price/reference feeds, exact MAE/MFE, cloud financial-record ingestion, automated AI coaching, Notion sync and the Discord application remain unimplemented or unverified. Browser visual QA remains unavailable. The dashboard is not OpenBB Workspace or a production-complete terminal.
 
 ## 3 First user and outcome
 
@@ -109,11 +111,19 @@ TradingView MCP is a candidate for quotes, bars, news, and calendar information 
 
 Use TradingView news where supported, official institutional releases for verification, and Marketaux's free tier for coverage gaps. The [Marketaux demo adapter](MARKETAUX-NEWS-INTEGRATION.md) provides one-shot gold/crypto news snapshots with a private environment token; its attempted provider request returned HTTP 403, so authentication and actual coverage remain unverified. Evaluate CoinDesk RSS as a supplemental crypto source with publisher terms checked. FRED and EIA are candidates for appropriately timed macro/energy series, not substitutes for trading quotes. Marketaux is news, not a price or volume feed.
 
-Initial news polling is 30 minutes with cache reuse and quota-aware manual refresh. The documented Marketaux free plan checked during planning had 100 requests/day and three articles/request; recheck at implementation. Initial budget: 48 base, 24 shared regional/crypto requests, 28 for retries/pagination/reserve. Filters never create upstream calls. Limited responses mean incomplete coverage; do not advertise exhaustive breaking news.
+News and Session Briefings refresh before Dennis's ICT windows, replacing the earlier 30-minute polling proposal: Asia at 19:45 America/New_York Sunday–Thursday; London at 01:45 and New York at 06:45 Monday–Friday. These are 15 minutes before the methodology's 20:00, 02:00 and 07:00 windows, not exchange opening times. Convert to America/Vancouver with current IANA rules. Reuse the three enabled schedules; do not create duplicate four-hour or per-provider tasks. A saved schedule is distinct from a verified successful run.
+
+Each run researches source-backed news, preserves publication/report periods, writes a session-specific briefing with its own preparation time and news cutoff, retains other sessions, and verifies readback without republishing the app. On failure, retain the last successful content and its true timestamp. Filters reuse cached data. Marketaux remains a candidate adapter, with account entitlements, limits and display rights checked before activation. Limited results must never be described as exhaustive coverage.
 
 Use bounded batched quote requests, proposed 60-second refresh when open and permitted. Track unavailable, disconnected, stale, delayed, partial, and closed-market states separately. Slower reports retain observation/reporting periods and publication dates. A no-new-stories response can be a successful feed check.
 
-OpenBB remains an optional research surface over the same normalized API through widget/app definitions. It is not a mandatory frontend or an all-in-one free feed. Do not maintain a duplicate data pipeline.
+### OpenBB research backend
+
+Adopt OpenBB's Open Data Platform (ODP) as the planned integration layer for multi-provider market research. Its role is to access and normalize macroeconomic, rates, positioning and supported market datasets for the existing dashboard, Session Briefings and shared tutor evidence service. It is not currently connected, does not replace MT5 execution/account records, and does not grant free access or display rights to every provider. See [OpenBB research integration](OPENBB-RESEARCH-INTEGRATION.md) for the contract, provider gates and acceptance criteria.
+
+Keep the current web dashboard as the primary interface. OpenBB Workspace is an optional future client of the same authenticated research service; do not build a duplicate pipeline or require a UI migration. Use OpenBB's Python/REST integration for backend jobs and optionally expose a restricted research MCP to the tutor. Discover installed V5 provider capabilities and pin tested package versions; do not copy V4 command paths without migration checks.
+
+First increment: verified macro/rates series and gold CFTC positioning. Next: economic-calendar events and reference quotes/history where permitted. Each dataset carries the original provider, exact instrument/series, source observation/publication/retrieval times, revisions, units, delay and coverage. Derived results retain input lineage. No authenticated provider response means no populated value. News facts remain linked to the original publisher even if later retrieved through an OpenBB adapter.
 
 ### MT5 broker data
 
@@ -131,7 +141,7 @@ Reference slots may be unavailable when evidence is insufficient. Releasing a us
 
 ## 9 Architecture and records
 
-Use the existing Next.js/TypeScript direction, an authenticated API, PostgreSQL, private object storage, background parsing/ingestion jobs, deterministic analytics, and a structured AI review service. Begin with the existing deployment conventions after validating them. Python/FastAPI is optional for provider/analytics workers if justified; do not require a second stack for simple calculations.
+Use the existing Next.js/TypeScript direction, an authenticated API, PostgreSQL, private object storage, background parsing/ingestion jobs, deterministic analytics, and a structured AI review service. Begin with the existing deployment conventions after validating them. An OpenBB integration requires a separately hosted compatible Python research worker/service, typically with an authenticated REST boundary. Keep simple journal calculations in the existing deterministic service. The current Sites frontend/news service runs in a Worker environment; it cannot directly run the OpenBB Python packages. Do not silently provision infrastructure or claim a working OpenBB deployment from an architecture diagram.
 
 Logical records: users/accounts; instruments/calendars; observations/bars/references; news/events/reports; sessions; ideas; executions and revisions; cash flows; uploads/extraction candidates/import reviews; evidence links; metric runs; price-path coverage; daily review versions/process assessments; experiments; connection credentials by secure reference; Notion export mappings.
 
@@ -151,7 +161,7 @@ A daily review uses deterministic metrics plus saved plans, screenshots, and use
 |---|---|---|
 | A Foundation | Private auth, journal entities, original-file storage, CSV mapping/review | Owner isolation and durable state; original records remain auditable |
 | B Daily improvement | Reconciled metrics, daily review/rubric, experiment tracking, Markdown export | Deterministic fixtures and complete import-to-review flow pass |
-| C Research context | Gold/DXY core references, delayed regional news/calendar, oil/rates context, BTC desk | Actual authorized calls and quality states verified; source gaps disclosed |
+| C Research context | OpenBB provider discovery, macro/rates and CFTC slice, session briefs, followed by eligible gold/DXY/oil/BTC references and calendar | Underlying provider calls, access rights, cache/freshness and saved evidence verified; no fabricated gaps |
 | D Evidence enrichment | PDF/image extraction review, eligible price-path excursions, optional Notion export | Human review, matching-path evidence, idempotent writes verified |
 
 A+B form the first usable journal increment. C completes the proposed terminal-plus-journal MVP. D is staged enrichment: accept all supported evidence formats in A but do not block a useful CSV journal on universal OCR or price-path support. VWAP and excursion status must remain honest until their gates pass. The [implementation plan](MVP-IMPLEMENTATION-PLAN.md) defines executable work packages. Build the Discord educational slice alongside these stages; private daily-review retrieval depends on the authorized journal API. Separate deployment gates prevent the bot from blocking the first usable web journal.
@@ -168,14 +178,18 @@ A+B form the first usable journal increment. C completes the proposed terminal-p
 - Confirmed Notion exports return exact destination URLs, resist retries, preserve original theses, and leave unconfirmed data unexported.
 - Complete browser QA for desktop/mobile, keyboard navigation, empty/loading/error states, uploads/review, and evidence/source drawers before release.
 - Do not claim implementation from a static preview, provider documentation, or an untested connector setup.
+- OpenBB integration passes the OBB acceptance gates in [the research contract](OPENBB-RESEARCH-INTEGRATION.md), including original-provider attribution, observation/revision dates, endpoint/permission checks, quota-aware caching and isolation from broker operations.
+- Pre-session jobs update the intended upcoming session/date, preserve other briefings, use explicit news cutoffs and timezone-aware windows, and retain the last successful snapshot on failure. A fresh run must verify the saved briefing and its source links.
 
 ## 13 Pilot and open decisions
 
 Pilot with ten reviewed trading sessions plus a weekend scenario. Targets: useful preparation in five minutes; all factual claims traceable; all computed values reproducible; no duplicate confirmed fills; daily review completed for at least eight pilot sessions; one measurable experiment tracked through evaluation. Report sample counts and missing coverage with any performance trend.
 
-Before coding provider-specific integrations, verify: target broker export and timestamp convention; account currency; XAUUSD/DXY/BTC sources; volume and full-week history; permitted TradingView deployment; news/report display rights; object storage/auth choices; cost budget; and Notion schema. None of these is established by this proposal. They do not block fixtures and provider-independent journal contracts.
+Before coding provider-specific integrations, verify: target broker export and timestamp convention; account currency; XAUUSD/DXY/BTC sources; volume and full-week history; permitted TradingView deployment; news/report display rights; object storage/auth choices; cost budget; and Notion schema. Existing news storage and schedule setup are recorded above; remaining provider, broker and production decisions are unresolved. They do not block fixtures and provider-independent journal contracts.
 
 ## References
+
+- [OpenBB research backend contract](OPENBB-RESEARCH-INTEGRATION.md)
 
 - [Notion journal tutor trigger](NOTION-TUTOR-TRIGGER.md)
 - [Read-only MT5 broker data](MT5-DATA-INTEGRATION.md)

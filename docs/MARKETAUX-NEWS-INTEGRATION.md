@@ -47,3 +47,16 @@ The hosted follow-up requires a server-side secret, authenticated provider adapt
 
 - https://www.marketaux.com/documentation
 - https://www.marketaux.com/pricing
+
+
+## Third-party integration reference
+
+Reviewed https://github.com/api-evangelist/marketaux on 18 October 2026. This is an independent API Evangelist profile, not an official Marketaux SDK, data service or hosted connector. Its README explicitly describes text/machine-readable API artifacts rather than runnable software.
+
+Useful implementation references include OpenAPI news/entity/source descriptions, Postman/OpenCollection requests, query-token authentication notes, error mappings and an entity-news workflow. Validate all contracts and plan restrictions against https://www.marketaux.com/documentation before use. Do not copy a catalog's descriptions as evidence of a successful provider call.
+
+Its `mcp/marketaux-mcp.yml` is marked `status: candidate`, with `server: null`, `transport: null` and deployment mode `none`. The tool list is a derived proposal, not a Marketaux-hosted MCP server. It can inform a future allowlisted wrapper after direct REST authentication is verified; it does not provide a ready connection or bypass keys, quotas or permissions.
+
+For the unresolved HTTP 403, capture only safe diagnostics: status, content type, a documented provider error code if the response really is the expected JSON envelope, and relevant quota headers. Never log the authenticated URL, token or unrestricted response body. A 403 plus the actual Marketaux `endpoint_access_restricted` code would support a plan-access diagnosis. A bare 403, proxy page or network rejection does not establish that cause; the earlier public documentation request from the same workspace also returned 403. Distinguish host/network access from provider authentication before changing plans. Begin with the documented basic news endpoint, not candidate paid entity-statistics operations.
+
+No external repository code or credentials have been installed/copied. Runtime integration and provider access remain unverified.
