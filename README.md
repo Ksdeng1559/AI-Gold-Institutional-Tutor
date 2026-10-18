@@ -1,6 +1,6 @@
 # AI Gold Institutional Tutor
 
-An educational XAUUSD application for the **Gold Institutional Trading** methodology.
+A proposed gold research terminal and trade journal for the **Gold Institutional Trading** project, with the education and AI Tutor roadmap retained for later releases.
 
 > [!IMPORTANT]
 > ## Living Source of Truth — Notion
@@ -24,13 +24,23 @@ An educational XAUUSD application for the **Gold Institutional Trading** methodo
 | Versioned scoring implementation and AI release contracts | **GitHub** |
 | Tests, CI/CD and deployment | **GitHub** |
 
+**Proposal note:** The terminal/journal PRD versions Dennis’s proposed next-release technical scope. The Notion course plan has not been overwritten. If the proposal is adopted, reconcile the release roadmap in Notion; keep implementation contracts reproducible in GitHub.
+
 **Maintenance rule:** Do not manually mirror routine Notion edits into this README. Update GitHub when a change affects code, schemas, tests, deployment, security, or another versioned implementation contract.
 
-## Product goal
-Teach traders to classify session context, evaluate **entry quality**, review screenshots, improve execution behaviour, and journal decisions independently of P&L.
+## Proposed next MVP
+
+Build a **Gold Research Terminal and Trade Journal**: fundamental news and market context alongside reviewed statements, screenshots, daily performance analysis, and one measurable improvement for the next session. Bloomberg-style describes the information-dense interface; this project has no Bloomberg affiliation or data rights.
+
+- **Start here:** [Proposed MVP PRD](docs/PRD.md)
+- **Build sequence:** [Implementation plan](docs/MVP-IMPLEMENTATION-PLAN.md)
+- **Calculation and evidence rules:** [Metrics contract](docs/METRICS-SPEC.md)
+- **Visual reference:** [Terminal wireframe](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site)
+
+The repository remains documentation-only. The separate wireframe is a local-interaction preview with unconnected providers; it is not a production app built from this repository.
 
 ## Core workflow
-Course → AI Tutor → Visual Trade Review → Entry Quality Score → Behaviour Review → Journal → Setup Library → Continuous Improvement
+Prepare → Plan → Trade externally → Upload statements and screenshots → Reconcile → Daily analysis → Test one improvement
 
 ## Core methodology
 - Asia → London imprint → New York classification
@@ -40,19 +50,18 @@ Course → AI Tutor → Visual Trade Review → Entry Quality Score → Behaviou
 - Liquidity sweeps, FVGs, order blocks, MSS/CHoCH/BOS, displacement, retest
 - TDI/MACD/EMA as execution confirmation layers
 
-## MVP
-1. AI Tutor chat
-2. Course and lesson library
-3. Multi-timeframe screenshot upload
-4. Structured visual trade review
-5. Entry Quality scoring
-6. Behaviour scoring
-7. Trade journal
-8. Setup library
-9. Progress analytics
-10. Content/resource library
+## MVP scope
+1. Gold fundamentals and delayed regional news across Asia, London/Europe, and US/New York.
+2. DXY, oil, yields, BTC context, and a focused crypto-news desk.
+3. Gold price, daily open, pivots, daily and weekly VWAP with explicit source/availability states.
+4. Sessions, trade ideas, private screenshots, reviewed statement imports, and execution reconciliation.
+5. Win rate, profit factor, expectancy, and evidence-qualified MAE/MFE.
+6. Daily decision-quality review, rule-adherence coverage, and one measurable experiment.
+7. Existing Notion journal access and optional confirmed export.
 
-## Entry Quality model
+Start with a durable CSV journal and daily review, then add verified research adapters. No streaming news or automated execution is required. Course delivery, tutor chat, entry-quality scoring, and the Content Bible remain a later roadmap; see the [previous tutor PRD](docs/reference/AI-GOLD-TUTOR-PRD.md).
+
+## Future Entry Quality model
 - Location Quality — 20
 - Liquidity Event — 20
 - M5 Structure/Displacement — 20
@@ -92,3 +101,4 @@ The score measures **entry quality, not probability of winning**.
 - **Initial content implementation reference:** `docs/CONTENT-BIBLE.md`
 
 - **TradingView connection setup and evidence contract:** [TradingView integration](docs/TRADINGVIEW-INTEGRATION.md)
+

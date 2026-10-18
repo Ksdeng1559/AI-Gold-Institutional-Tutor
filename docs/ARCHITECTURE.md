@@ -1,5 +1,18 @@
 # Architecture — AI Gold Institutional Tutor
 
+## Proposed terminal and journal MVP extension
+
+The next-release scope is proposed in [PRD](PRD.md), with [work packages](MVP-IMPLEMENTATION-PLAN.md) and a [metrics contract](METRICS-SPEC.md). The architecture below originally supported the course/tutor plan; it is a reusable baseline rather than an instruction to build every course service for the terminal MVP.
+
+Add these logical modules to the existing authenticated web/API and private-data architecture:
+- Research adapters → normalized observations/news/calendar/references → source-backed session briefs.
+- Private uploads → parsing/extraction candidates → user review and reconciliation → confirmed executions and cash flows.
+- Journal sessions/ideas and immutable plan snapshots → deterministic metrics → daily evidence review → one improvement experiment.
+- Optional matched historical path → eligibility-qualified MAE/MFE, with method/coverage preserved.
+- Optional confirmed Notion export → existing journal destination with idempotent mapping.
+
+Code computes financial metrics. Models draft explanations and cannot replace broker evidence. Preserve owner isolation, raw source provenance, cost/timezone semantics, partial-close identity, and review versions. Delayed news is sufficient; no streaming provider or broker execution is required. OpenBB is an optional UI over the same normalized backend. Validate production stack choices before provisioning; no infrastructure is created by these documents.
+
 ## High-level architecture
 User → Next.js Web App → Auth → Application API → AI Orchestrator → Multimodal LLM / Retrieval → Structured Review → Supabase
 
@@ -109,3 +122,4 @@ Recommended first deployment:
 - Supabase for Postgres/Auth-adjacent data/storage if Clerk is used for identity
 - environment variables for model/API keys
 - CI tests for schema and score validation
+
