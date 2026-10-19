@@ -1,0 +1,24 @@
+import assert from'node:assert/strict';import{readFile}from'node:fs/promises';
+const code=await readFile('dist/server/index.js','utf8');const {default:worker}=await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
+const store=new Map();let rev=0;const env={BUCKET:{async get(k){const o=store.get(k);return o?{...o,body:o.value,json:async()=>JSON.parse(o.value)}:null;},async head(k){return this.get(k);},async put(k,value,options={}){const prior=store.get(k);if(options.onlyIf?.etagMatches&&prior?.etag!==options.onlyIf.etagMatches)return null;if(options.onlyIf?.etagDoesNotMatch==='*'&&prior)return null;const o={value,...options,etag:'v'+(++rev),size:typeof value==='string'?value.length:value.byteLength};store.set(k,o);return o;},async list({prefix}){return {objects:[...store.keys()].filter(key=>key.startsWith(prefix)).map(key=>({key})),truncated:false};}}};
+const req=(path,method='GET',value,user='owner',extra={})=>new Request('https://desk.test'+path,{method,headers:{...(user?{'oai-authenticated-user-id':user}:{}),...(value?{'Content-Type':'application/json','X-Journal-Request':'1'}:{}),...extra},body:value?JSON.stringify(value):undefined});
+const call=async(...args)=>worker.fetch(req(...args),env);
+assert.equal((await call('/api/journal','GET',null,null)).status,401);
+const evidence={format:'gold-journal-v1',source:'TEST FIXTURE',account_mode:'demo',currency:'USD',date:'2026-10-18',range:{from:'2026-10-18',through:'2026-10-18'},session:'Asia',process:'Rules followed',notes:'Fixture only',experiment:'Document each thesis',reviewed_positions:[{id:'A',date:'2026-10-18',net:100,symbol:'XAUUSD'},{id:'B',date:'2026-10-18',net:-50,symbol:'XAUUSD'}],metrics:{net:999999}};
+let r=await call('/api/journal','POST',{workspace:evidence,revision:null});assert.equal(r.status,200);const saved=await r.json();assert.equal(saved.workspace.metrics.net,50);assert.equal(saved.workspace.metrics.winRate,.5);assert.equal((await(await call('/api/journal')).json()).workspace.metrics.net,50);
+assert.equal((await(await call('/api/journal','GET',null,'another-user')).json()).workspace,null);
+assert.equal((await call('/api/journal','POST',{workspace:evidence,revision:null})).status,409);
+assert.equal((await call('/api/journal','POST',{workspace:evidence,revision:saved.revision},'owner',{Origin:'https://evil.test'})).status,403);
+assert.equal((await call('/api/journal','POST',{workspace:{...evidence,reviewed_positions:[...evidence.reviewed_positions,evidence.reviewed_positions[0]]},revision:saved.revision})).status,400);
+assert.equal((await call('/api/journal','POST',{workspace:{...evidence,account_mode:'real',source:'FICTIONAL SAMPLE'},revision:saved.revision})).status,400);
+assert.equal((await call('/api/reviews','POST',{...evidence,notes:''})).status,400);
+r=await call('/api/reviews','POST',evidence);assert.equal(r.status,201);assert.equal((await(await call('/api/reviews')).json()).records.length,1);assert.equal((await(await call('/api/reviews','GET',null,'another-user')).json()).records.length,0);
+// Evidence MIME mismatch is rejected; valid files and links stay inside the owner's namespace.
+let upload=new Request('https://desk.test/api/evidence',{method:'POST',headers:{'oai-authenticated-user-id':'owner','X-Journal-Request':'1','Content-Type':'image/png','X-Evidence-Name':'test.png'},body:new Uint8Array([137,80,78,71,13,10,26,10,0,0,0,0])});r=await worker.fetch(upload,env);assert.equal(r.status,201);const attachment=await r.json();
+assert.equal((await call('/api/evidence/'+attachment.id)).status,200);assert.equal((await call('/api/evidence/'+attachment.id,'GET',null,'another-user')).status,404);
+assert.equal((await call('/api/reviews','POST',{...evidence,evidence:[attachment]})).status,201);
+assert.equal((await call('/api/reviews','POST',{...evidence,evidence:[attachment]},'another-user')).status,400);
+assert.equal((await call('/api/reviews','POST',{...evidence,evidence:[attachment,attachment]})).status,400);
+upload=new Request('https://desk.test/api/evidence',{method:'POST',headers:{'oai-authenticated-user-id':'owner','X-Journal-Request':'1','Content-Type':'image/png'},body:'<script>bad</script>'});assert.equal((await worker.fetch(upload,env)).status,415);
+assert.equal((await call('/api/mt5/tools')).status,409);assert.equal((await(await call('/api/health')).json()).mode,'hosted');
+console.log('Private journal checks passed: identity isolation, recomputed metrics, conflict protection, immutable reviews, file signatures and attachment ownership.');

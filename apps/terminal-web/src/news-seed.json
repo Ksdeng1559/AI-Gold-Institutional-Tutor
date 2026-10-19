@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "updated_at": "2026-10-18T15:54:44.704403+00:00",
+  "method": "Editorial snapshot from publisher pages and official releases; not Marketaux or MT5",
+  "schedule_status": "Pending background-writer verification",
+  "stories": [
+    {
+      "id": "oil-20261018",
+      "asset": "Gold",
+      "topic": "Energy",
+      "regions": [
+        "Global"
+      ],
+      "title": "Oil and regional risk lead the weekend watchlist",
+      "summary": "Reuters reports that higher oil supported Saudi equities on Sunday while regional tensions weighed on other markets.",
+      "relevance": "Watch energy inflation and risk sentiment at the next open; gold's response is not predetermined.",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/world/middle-east/oil-lifts-saudi-bourse-egypt-tumbles-regional-tensions-2026-10-18/",
+      "published_at": "2026-10-18T13:51:00Z",
+      "period": "Sunday developments; oil settlement referenced is Friday",
+      "verification": "Publisher reporting"
+    },
+    {
+      "id": "ecb-20261017",
+      "asset": "Gold",
+      "topic": "Monetary policy",
+      "regions": [
+        "London / Europe"
+      ],
+      "title": "Lagarde points to tighter financing as a brake on inflation",
+      "summary": "Reuters reports that Lagarde said the bond selloff increases borrowing costs and should curb growth and inflation.",
+      "relevance": "Compare European rate expectations with US yields and the dollar before attributing a gold move.",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/business/finance/ecbs-lagarde-says-bond-selloff-will-slow-inflation-2026-10-17/",
+      "published_at": "2026-10-17T08:01:00Z",
+      "period": "Remarks on October 17",
+      "verification": "Publisher reporting"
+    },
+    {
+      "id": "gold-20261016",
+      "asset": "Gold",
+      "topic": "Monetary policy",
+      "regions": [
+        "US / New York"
+      ],
+      "title": "Gold faces weekly pressure as traders assess the Fed path",
+      "summary": "Reuters reported gold was heading for a weekly loss on Friday amid uncertainty about further US rate increases.",
+      "relevance": "Carry the rates question into the next session; Friday's report is not a current quote.",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/world/india/gold-set-weekly-drop-traders-assess-fed-signals-2026-10-16/",
+      "published_at": "2026-10-16T18:19:00Z",
+      "period": "Friday trading update",
+      "verification": "Publisher reporting"
+    },
+    {
+      "id": "boe-20261016",
+      "asset": "Gold",
+      "topic": "Monetary policy",
+      "regions": [
+        "London / Europe"
+      ],
+      "title": "Bailey says wider energy-price effects remain limited so far",
+      "summary": "Reuters reports that the Bank of England governor sees limited evidence of broader inflation spillovers but says conclusions are premature.",
+      "relevance": "Track sterling, gilt yields and policy expectations through the London handover.",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/world/uk/bank-englands-bailey-says-second-round-inflation-pressures-look-subdued-so-far-2026-10-16/",
+      "published_at": "2026-10-16T02:19:00Z",
+      "period": "Remarks on October 16",
+      "verification": "Publisher reporting"
+    },
+    {
+      "id": "china-20261015",
+      "asset": "Gold",
+      "topic": "Demand",
+      "regions": [
+        "Asia"
+      ],
+      "title": "China's official gold purchases strengthen in September",
+      "summary": "World Gold Council reports a 23-tonne September addition by the PBoC, bringing reported third-quarter buying to 63 tonnes.",
+      "relevance": "This is a medium-term demand input, not evidence of buying at the next session open.",
+      "source": "World Gold Council",
+      "url": "https://www.gold.org/goldhub/gold-focus/2026/10/china-gold-market-update-q3-ends-strong-official-gold-buying",
+      "published_at": "2026-10-15",
+      "period": "September and Q3 2026; published October 15",
+      "verification": "Industry research; cites official reserve data"
+    },
+    {
+      "id": "cpi-20261014",
+      "asset": "Gold",
+      "topic": "Inflation",
+      "regions": [
+        "US / New York"
+      ],
+      "title": "September US CPI rises 0.6% monthly and 3.7% annually",
+      "summary": "The BLS release records headline CPI at 0.6% month over month and 3.7% year over year; core CPI rose 0.3% monthly.",
+      "relevance": "Separate this released data from market rate expectations and the next scheduled inflation report.",
+      "source": "US Bureau of Labor Statistics",
+      "url": "https://www.bls.gov/news.release/archives/cpi_10142026.htm",
+      "published_at": "2026-10-14T12:30:00Z",
+      "period": "September 2026",
+      "verification": "Official release"
+    },
+    {
+      "id": "btc-20261016",
+      "asset": "Crypto",
+      "topic": "BTC",
+      "regions": [
+        "US / New York"
+      ],
+      "title": "Bitcoin steadies after a four-week low",
+      "summary": "Barron's reports bitcoin stabilized after US inflation and activity data strengthened expectations of further rate increases.",
+      "relevance": "Review rates and risk appetite together; do not assume BTC and gold must respond alike.",
+      "source": "Barron's / Dow Jones Newswires",
+      "url": "https://www.barrons.com/livecoverage/stock-market-news-today-101626/card/bitcoin-stabilizes-after-hitting-4-week-low-strategy-hit-by-move-to-exclude-it-from-indexes--UQKqmhnaM8S5ZIvdRmum",
+      "published_at": "2026-10-16",
+      "period": "Friday market coverage; Thursday low",
+      "verification": "Publisher reporting; access may require subscription"
+    },
+    {
+      "id": "crypto-dollar-20261016",
+      "asset": "Crypto",
+      "topic": "BTC",
+      "regions": [
+        "Global"
+      ],
+      "title": "Softer dollar supports major cryptocurrencies in Friday coverage",
+      "summary": "Dow Jones coverage in the WSJ describes support from a softer dollar while spot demand remains a concern.",
+      "relevance": "Use synchronized BTC and DXY observations when checking the reported relationship.",
+      "source": "Wall Street Journal / Dow Jones",
+      "url": "https://www.wsj.com/finance/currencies/asian-currencies-consolidate-before-fed-chairmans-fireside-chat-f4462ae4",
+      "published_at": "2026-10-16",
+      "period": "Friday market commentary",
+      "verification": "Publisher reporting; access may require subscription"
+    }
+  ]
+}

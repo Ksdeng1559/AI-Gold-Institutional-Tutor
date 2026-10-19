@@ -1,6 +1,6 @@
 # AI Gold Institutional Tutor
 
-An educational XAUUSD application for the **Gold Institutional Trading** methodology.
+A proposed gold research terminal and trade journal for the **Gold Institutional Trading** project, with the education and AI Tutor roadmap retained for later releases.
 
 > [!IMPORTANT]
 > ## Living Source of Truth — Notion
@@ -24,13 +24,42 @@ An educational XAUUSD application for the **Gold Institutional Trading** methodo
 | Versioned scoring implementation and AI release contracts | **GitHub** |
 | Tests, CI/CD and deployment | **GitHub** |
 
+**Proposal note:** The terminal/journal PRD versions Dennis’s proposed next-release technical scope. The Notion course plan has not been overwritten. If the proposal is adopted, reconcile the release roadmap in Notion; keep implementation contracts reproducible in GitHub.
+
 **Maintenance rule:** Do not manually mirror routine Notion edits into this README. Update GitHub when a change affects code, schemas, tests, deployment, security, or another versioned implementation contract.
 
-## Product goal
-Teach traders to classify session context, evaluate **entry quality**, review screenshots, improve execution behaviour, and journal decisions independently of P&L.
+## Proposed two application MVP
+
+Build two independently deployable applications in one repository:
+
+1. **Gold Research Terminal and Trade Journal** — web research, uploads, reconciliation, and performance review.
+2. **Discord Gold Tutor** — curated lessons, Q&A, practice, screenshot review, and private journal handoff.
+
+The web application combines fundamental news and market context alongside reviewed statements, screenshots, daily performance analysis, and one measurable improvement for the next session. Bloomberg-style describes the information-dense interface; this project has no Bloomberg affiliation or data rights.
+
+- **Start here:** [Proposed MVP PRD](docs/PRD.md)
+- **Discord application:** [Gold Tutor PRD](docs/DISCORD-GOLD-TUTOR-PRD.md)
+- **Research backend:** [OpenBB integration and provider gates](docs/OPENBB-RESEARCH-INTEGRATION.md)
+- **Broker data:** [Read-only MT5 integration](docs/MT5-DATA-INTEGRATION.md)
+- **Journal-triggered coaching:** [Notion to Tutor workflow](docs/NOTION-TUTOR-TRIGGER.md)
+- **Build sequence:** [Implementation plan](docs/MVP-IMPLEMENTATION-PLAN.md)
+- **Calculation and evidence rules:** [Metrics contract](docs/METRICS-SPEC.md)
+- **Visual reference:** [Working research terminal](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site)
+
+## Runnable journal application
+
+The first implementation is available at [apps/mt5-journal](apps/mt5-journal/README.md): a local Python web service with native MT5 MCP reads, statement imports, reviewed completed-position metrics, screenshot previews and SQLite daily reviews. Run it on the same PC as MT5. The service restricts access to six data-read tools and keeps the terminal key out of browser code. Actual broker connectivity still requires the local setup and verification described there.
+
+The [hosted terminal and journal](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site) now have a working research dashboard, source-linked news, Alpha Vantage references, session briefings, reviewed metrics, private journal snapshot save/restore, immutable daily reviews and private screenshot/PDF attachments. Source and setup: [apps/terminal-web](apps/terminal-web/README.md). Daily metrics use the selected Vancouver closing date; the overview uses the separately saved reviewed range. The Asia pre-session snapshot update and readback succeeded. Browser preview workflows and automated financial/access checks passed.
+
+The optional [Alpha Vantage MCP collector](apps/alpha-vantage-feed/README.md) caches references and enforces a persistent request budget. It requires a separately configured private key and has not been exercised against the actual local provider. Hosted references use the existing plugin/pre-session path. OpenBB, DXY/TradingView, exact VWAP/MAE/MFE, automatic OCR, Notion/Discord triggers and real MT5 account connectivity remain unverified or unconnected. [Release details](apps/terminal-web/DASHBOARD-RELEASE.md).
 
 ## Core workflow
-Course → AI Tutor → Visual Trade Review → Entry Quality Score → Behaviour Review → Journal → Setup Library → Continuous Improvement
+Prepare → Plan → Trade externally → Upload statements and screenshots → Reconcile → Daily analysis → Test one improvement
+
+## Notion to Discord learning loop
+
+Mark a journal entry **Ready for AI Review** → the shared tutor service reviews a versioned evidence snapshot → findings return to Notion → an opted-in linked trader receives a private Discord completion link. Ordinary edits and tutor writeback do not loop into new jobs. This is a proposed integration, not an active automation.
 
 ## Core methodology
 - Asia → London imprint → New York classification
@@ -40,19 +69,20 @@ Course → AI Tutor → Visual Trade Review → Entry Quality Score → Behaviou
 - Liquidity sweeps, FVGs, order blocks, MSS/CHoCH/BOS, displacement, retest
 - TDI/MACD/EMA as execution confirmation layers
 
-## MVP
-1. AI Tutor chat
-2. Course and lesson library
-3. Multi-timeframe screenshot upload
-4. Structured visual trade review
-5. Entry Quality scoring
-6. Behaviour scoring
-7. Trade journal
-8. Setup library
-9. Progress analytics
-10. Content/resource library
+## MVP scope
+1. Gold fundamentals and delayed regional news across Asia, London/Europe, and US/New York.
+2. DXY, oil, yields, BTC context, and a focused crypto-news desk.
+3. Gold price, daily open, pivots, daily and weekly VWAP with explicit source/availability states.
+4. Sessions, trade ideas, private screenshots, reviewed statement imports, and execution reconciliation.
+5. Win rate, profit factor, expectancy, and evidence-qualified MAE/MFE.
+6. Daily decision-quality review, rule-adherence coverage, and one measurable experiment.
+7. Existing Notion journal access and optional confirmed export.
+8. Separate Discord tutor for learning, screenshot explanation, and authorized journal handoff.
+9. Optional read-only MT5 collector for broker quotes, positions, executions, and matched historical-path evidence.
 
-## Entry Quality model
+Start with a durable CSV journal and daily review, then add verified research adapters. No streaming news or automated execution is required. A focused tutor runs on Discord as a companion MVP. Full course delivery, entry-quality scoring, and the Content Bible remain a later roadmap; see the [previous tutor PRD](docs/reference/AI-GOLD-TUTOR-PRD.md).
+
+## Future Entry Quality model
 - Location Quality — 20
 - Liquidity Event — 20
 - M5 Structure/Displacement — 20
@@ -92,3 +122,4 @@ The score measures **entry quality, not probability of winning**.
 - **Initial content implementation reference:** `docs/CONTENT-BIBLE.md`
 
 - **TradingView connection setup and evidence contract:** [TradingView integration](docs/TRADINGVIEW-INTEGRATION.md)
+

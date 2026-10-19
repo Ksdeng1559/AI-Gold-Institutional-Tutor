@@ -1,0 +1,10 @@
+import{readFile,readdir,mkdir,writeFile,rm}from'node:fs/promises';
+const files=await readdir('public');const assets={};for(const file of files)assets['/'+file]=await readFile('public/'+file,'utf8');
+const journal=await readFile('src/journal-api.mjs','utf8');
+const analytics=(await readFile('public/journal.js','utf8')).split("if(typeof module!=='undefined')")[0];
+const seed=JSON.parse(await readFile('src/news-seed.json','utf8'));const worker=await readFile('src/worker.mjs','utf8');
+await rm('dist',{recursive:true,force:true});
+await mkdir('dist/server',{recursive:true});await mkdir('dist/.openai',{recursive:true});
+await writeFile('dist/server/index.js','const ASSETS='+JSON.stringify(assets)+';\nconst SEED='+JSON.stringify(seed)+';\nconst JournalAnalytics=(()=>{'+analytics+';return {metrics,day,reviewRows};})();\n'+journal+'\n'+worker);
+await writeFile('dist/.openai/hosting.json',await readFile('.openai/hosting.json'));
+console.log('Built news Worker with '+files.length+' preserved assets.');

@@ -1,5 +1,36 @@
 # Architecture — AI Gold Institutional Tutor
 
+## Two independently deployed applications
+
+- apps/terminal-web: research terminal, uploads, journal, reconciliation, and daily analytics.
+- apps/discord-tutor: signature-verified command handler, deferred responses, curated lesson/Q&A and screenshot-review flows.
+- packages/contracts: shared identity, evidence, review, and metric envelopes.
+- packages/tutor-core: reusable grounded tutoring and knowledge retrieval.
+- packages/analytics: deterministic calculations; journal API exposes owner-scoped results.
+
+Use shared knowledge/evidence services and an authorized journal API. Discord handlers do not bypass owner checks with broad database credentials. Verify explicit account linking; public course retrieval cannot include private trading records. No Discord Gateway or privileged message monitoring is required for the proposed HTTP command-only design; validate platform setup at implementation. The [Discord PRD](DISCORD-GOLD-TUTOR-PRD.md) is the companion interface contract. No bot or infrastructure has been deployed.
+
+## Optional MT5 collector
+
+The [MT5 data contract](MT5-DATA-INTEGRATION.md) adds a read-only collector on a verified Windows PC/VPS with an authorized MT5 terminal. Outbound authenticated ingestion normalizes account state, quotes, positions, and execution/history evidence; broker credentials stay on the collector. The cloud journal and Discord service do not control the terminal. Preserve execution identity, account mode, timestamps, volume classification, and coverage. Block all order operations. MT5 updates do not independently request tutor jobs.
+
+## Notion event adapter and tutor jobs
+
+The [Notion trigger contract](NOTION-TUTOR-TRIGGER.md) adds verified webhook/polling ingress, a durable request queue, source snapshot builder, tutor worker, versioned Notion writeback, and a private-notification outbox. Only explicit Ready requests trigger jobs. Job identity, canonical-input hashing, per-page leases, and source rechecks prevent duplicates, self-trigger loops, and unlabeled stale results. Bot notifications require verified linking and opt-in; delivery failure cannot expose personal data publicly. Journal metrics remain deterministic and owner scoped.
+
+## Proposed terminal and journal MVP extension
+
+The next-release scope is proposed in [PRD](PRD.md), with [work packages](MVP-IMPLEMENTATION-PLAN.md) and a [metrics contract](METRICS-SPEC.md). The architecture below originally supported the course/tutor plan; it is a reusable baseline rather than an instruction to build every course service for the terminal MVP.
+
+Add these logical modules to the existing authenticated web/API and private-data architecture:
+- Research adapters → normalized observations/news/calendar/references → source-backed session briefs.
+- Private uploads → parsing/extraction candidates → user review and reconciliation → confirmed executions and cash flows.
+- Journal sessions/ideas and immutable plan snapshots → deterministic metrics → daily evidence review → one improvement experiment.
+- Optional matched historical path → eligibility-qualified MAE/MFE, with method/coverage preserved.
+- Optional confirmed Notion export → existing journal destination with idempotent mapping.
+
+Code computes financial metrics. Models draft explanations and cannot replace broker evidence. Preserve owner isolation, raw source provenance, cost/timezone semantics, partial-close identity, and review versions. Delayed news is sufficient; no streaming provider or broker execution is required. OpenBB is an optional UI over the same normalized backend. Validate production stack choices before provisioning; no infrastructure is created by these documents.
+
 ## High-level architecture
 User → Next.js Web App → Auth → Application API → AI Orchestrator → Multimodal LLM / Retrieval → Structured Review → Supabase
 
@@ -13,7 +44,8 @@ Supporting systems:
 ```
 AI-Gold-Institutional-Tutor/
 ├─ apps/
-│  └─ web/
+│  ├─ terminal-web/
+│  └─ discord-tutor/
 ├─ packages/
 │  ├─ tutor-core/
 │  ├─ scoring-engine/
@@ -109,3 +141,11 @@ Recommended first deployment:
 - Supabase for Postgres/Auth-adjacent data/storage if Clerk is used for identity
 - environment variables for model/API keys
 - CI tests for schema and score validation
+
+
+
+## OpenBB research backend decision — 18 October 2026
+
+The v2.4 PRD places OpenBB ODP behind the existing dashboard as a planned provider integration layer, not a frontend replacement. A separately hosted, version-pinned Python research service exposes authenticated reads/jobs for macro, rates, positioning and eligible market data. The Sites Worker continues serving the interface and shared news/briefings; it does not import Python OpenBB packages. Broker fills/account state stay in the read-only local MT5 adapter and deterministic journal service. No market-research endpoint may invoke broker trading operations.
+
+Provider adapters → normalized observations and cache → versioned session evidence → web terminal / tutor. News retains original publisher attribution. Optional OpenBB Workspace and research MCP reuse this service rather than creating another ledger or cache. API keys remain server-side; entitlements, freshness, revisions, exact series/instruments and coverage are checked per dataset. The [OpenBB integration contract](OPENBB-RESEARCH-INTEGRATION.md) defines records and release gates. This is a design decision, not evidence that OpenBB is deployed.

@@ -1,0 +1,227 @@
+{
+  "Asia": {
+    "session": "Asia",
+    "session_date": "2026-10-18",
+    "session_open_at": "2026-10-18T20:00:00-04:00",
+    "prepared_at": "2026-10-18T16:13:44.078Z",
+    "news_cutoff": "2026-10-18T15:54:44.704403+00:00",
+    "summary": "Separate weekend headlines from the market response at the first Asian window.",
+    "focus": "Watch regional demand context and the opening response to energy and US-rate news.",
+    "handover": "Friday's gold coverage raised the rates question; weekend energy developments add another research input. No reopening price response is available in this dashboard.",
+    "coverage": "Initial preparation from the saved news snapshot. This is not a fresh news search or an observed market handover. Quotes, reference levels and the session calendar are unverified.",
+    "drivers": [
+      {
+        "title": "Demand · World Gold Council",
+        "observation": "World Gold Council reports a 23-tonne September addition by the PBoC, bringing reported third-quarter buying to 63 tonnes.",
+        "watch": "This is a medium-term demand input, not evidence of buying at the next session open."
+      },
+      {
+        "title": "Energy · Reuters",
+        "observation": "Reuters reports that higher oil supported Saudi equities on Sunday while regional tensions weighed on other markets.",
+        "watch": "Watch energy inflation and risk sentiment at the next open; gold's response is not predetermined."
+      },
+      {
+        "title": "Monetary policy · Reuters",
+        "observation": "Reuters reported gold was heading for a weekly loss on Friday amid uncertainty about further US rate increases.",
+        "watch": "Carry the rates question into the next session; Friday's report is not a current quote."
+      }
+    ],
+    "catalysts": [
+      {
+        "name": "Verify the session's official economic-release and central-bank calendar before trading",
+        "at": null,
+        "verification": "Calendar not connected; upcoming event times not verified",
+        "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+      }
+    ],
+    "scenarios": [
+      {
+        "condition": "If gold and the dollar move in opposite directions",
+        "response": "Check matching observation periods and whether rates or fresh news support that reading. The relationship alone does not authorize an entry."
+      },
+      {
+        "condition": "If gold and the dollar rise together, or the evidence conflicts",
+        "response": "Record the divergence, test alternative explanations and wait for your own location and execution criteria."
+      }
+    ],
+    "questions": [
+      "I checked the publication dates and separated old reports from new developments.",
+      "I verified the official calendar and my intended trading window.",
+      "I marked daily open, daily and weekly VWAP, pivots and relevant prior-session levels on my trading feed.",
+      "I wrote a thesis, an invalidation condition and the evidence that would change my view.",
+      "I confirmed my planned risk, loss limit and the conditions for taking no trade."
+    ],
+    "sources": [
+      {
+        "title": "China's official gold purchases strengthen in September",
+        "url": "https://www.gold.org/goldhub/gold-focus/2026/10/china-gold-market-update-q3-ends-strong-official-gold-buying",
+        "source": "World Gold Council",
+        "published_at": "2026-10-15"
+      },
+      {
+        "title": "Oil and regional risk lead the weekend watchlist",
+        "url": "https://www.reuters.com/world/middle-east/oil-lifts-saudi-bourse-egypt-tumbles-regional-tensions-2026-10-18/",
+        "source": "Reuters",
+        "published_at": "2026-10-18T13:51:00Z"
+      },
+      {
+        "title": "Gold faces weekly pressure as traders assess the Fed path",
+        "url": "https://www.reuters.com/world/india/gold-set-weekly-drop-traders-assess-fed-signals-2026-10-16/",
+        "source": "Reuters",
+        "published_at": "2026-10-16T18:19:00Z"
+      }
+    ]
+  },
+  "London": {
+    "session": "London",
+    "session_date": "2026-10-19",
+    "session_open_at": "2026-10-19T02:00:00-04:00",
+    "prepared_at": "2026-10-18T16:13:44.078Z",
+    "news_cutoff": "2026-10-18T15:54:44.704403+00:00",
+    "summary": "Review the Asian handover alongside UK and European policy developments before forming a session thesis.",
+    "focus": "Confirm what Asia actually did, then compare European rates, the dollar and gold.",
+    "handover": "Asia has not yet traded the upcoming window. Its range, extremes and observed response must be added from your verified feed before this handover can be classified.",
+    "coverage": "Initial preparation from the saved news snapshot. This is not a fresh news search or an observed market handover. Quotes, reference levels and the session calendar are unverified.",
+    "drivers": [
+      {
+        "title": "Monetary policy · Reuters",
+        "observation": "Reuters reports that Lagarde said the bond selloff increases borrowing costs and should curb growth and inflation.",
+        "watch": "Compare European rate expectations with US yields and the dollar before attributing a gold move."
+      },
+      {
+        "title": "Monetary policy · Reuters",
+        "observation": "Reuters reports that the Bank of England governor sees limited evidence of broader inflation spillovers but says conclusions are premature.",
+        "watch": "Track sterling, gilt yields and policy expectations through the London handover."
+      },
+      {
+        "title": "Energy · Reuters",
+        "observation": "Reuters reports that higher oil supported Saudi equities on Sunday while regional tensions weighed on other markets.",
+        "watch": "Watch energy inflation and risk sentiment at the next open; gold's response is not predetermined."
+      }
+    ],
+    "catalysts": [
+      {
+        "name": "Verify the session's official economic-release and central-bank calendar before trading",
+        "at": null,
+        "verification": "Calendar not connected; upcoming event times not verified",
+        "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+      }
+    ],
+    "scenarios": [
+      {
+        "condition": "If gold and the dollar move in opposite directions",
+        "response": "Check matching observation periods and whether rates or fresh news support that reading. The relationship alone does not authorize an entry."
+      },
+      {
+        "condition": "If gold and the dollar rise together, or the evidence conflicts",
+        "response": "Record the divergence, test alternative explanations and wait for your own location and execution criteria."
+      }
+    ],
+    "questions": [
+      "I checked the publication dates and separated old reports from new developments.",
+      "I verified the official calendar and my intended trading window.",
+      "I marked daily open, daily and weekly VWAP, pivots and relevant prior-session levels on my trading feed.",
+      "I wrote a thesis, an invalidation condition and the evidence that would change my view.",
+      "I confirmed my planned risk, loss limit and the conditions for taking no trade."
+    ],
+    "sources": [
+      {
+        "title": "Lagarde points to tighter financing as a brake on inflation",
+        "url": "https://www.reuters.com/business/finance/ecbs-lagarde-says-bond-selloff-will-slow-inflation-2026-10-17/",
+        "source": "Reuters",
+        "published_at": "2026-10-17T08:01:00Z"
+      },
+      {
+        "title": "Bailey says wider energy-price effects remain limited so far",
+        "url": "https://www.reuters.com/world/uk/bank-englands-bailey-says-second-round-inflation-pressures-look-subdued-so-far-2026-10-16/",
+        "source": "Reuters",
+        "published_at": "2026-10-16T02:19:00Z"
+      },
+      {
+        "title": "Oil and regional risk lead the weekend watchlist",
+        "url": "https://www.reuters.com/world/middle-east/oil-lifts-saudi-bourse-egypt-tumbles-regional-tensions-2026-10-18/",
+        "source": "Reuters",
+        "published_at": "2026-10-18T13:51:00Z"
+      }
+    ]
+  },
+  "New York": {
+    "session": "New York",
+    "session_date": "2026-10-19",
+    "session_open_at": "2026-10-19T07:00:00-04:00",
+    "prepared_at": "2026-10-18T16:13:44.078Z",
+    "news_cutoff": "2026-10-18T15:54:44.704403+00:00",
+    "summary": "Prepare a conditional New York plan around the London imprint, US macro evidence and the dollar.",
+    "focus": "Classify Pullback, Continuation, Reversal or Sideways only after checking the actual London and intermarket evidence.",
+    "handover": "The upcoming London session has not been observed. London direction, liquidity objectives and the DXY filter are unavailable here; do not infer an NY archetype from headlines.",
+    "coverage": "Initial preparation from the saved news snapshot. This is not a fresh news search or an observed market handover. Quotes, reference levels and the session calendar are unverified.",
+    "drivers": [
+      {
+        "title": "Inflation · US Bureau of Labor Statistics",
+        "observation": "The BLS release records headline CPI at 0.6% month over month and 3.7% year over year; core CPI rose 0.3% monthly.",
+        "watch": "Separate this released data from market rate expectations and the next scheduled inflation report."
+      },
+      {
+        "title": "Monetary policy · Reuters",
+        "observation": "Reuters reported gold was heading for a weekly loss on Friday amid uncertainty about further US rate increases.",
+        "watch": "Carry the rates question into the next session; Friday's report is not a current quote."
+      },
+      {
+        "title": "Energy · Reuters",
+        "observation": "Reuters reports that higher oil supported Saudi equities on Sunday while regional tensions weighed on other markets.",
+        "watch": "Watch energy inflation and risk sentiment at the next open; gold's response is not predetermined."
+      }
+    ],
+    "catalysts": [
+      {
+        "name": "Verify the session's official economic-release and central-bank calendar before trading",
+        "at": null,
+        "verification": "Calendar not connected; upcoming event times not verified",
+        "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+      }
+    ],
+    "scenarios": [
+      {
+        "condition": "If gold and the dollar move in opposite directions",
+        "response": "Check matching observation periods and whether rates or fresh news support that reading. The relationship alone does not authorize an entry."
+      },
+      {
+        "condition": "If gold and the dollar rise together, or the evidence conflicts",
+        "response": "Record the divergence, test alternative explanations and wait for your own location and execution criteria."
+      }
+    ],
+    "questions": [
+      "I checked the publication dates and separated old reports from new developments.",
+      "I verified the official calendar and my intended trading window.",
+      "I marked daily open, daily and weekly VWAP, pivots and relevant prior-session levels on my trading feed.",
+      "I wrote a thesis, an invalidation condition and the evidence that would change my view.",
+      "I confirmed my planned risk, loss limit and the conditions for taking no trade."
+    ],
+    "sources": [
+      {
+        "title": "September US CPI rises 0.6% monthly and 3.7% annually",
+        "url": "https://www.bls.gov/news.release/archives/cpi_10142026.htm",
+        "source": "US Bureau of Labor Statistics",
+        "published_at": "2026-10-14T12:30:00Z"
+      },
+      {
+        "title": "Gold faces weekly pressure as traders assess the Fed path",
+        "url": "https://www.reuters.com/world/india/gold-set-weekly-drop-traders-assess-fed-signals-2026-10-16/",
+        "source": "Reuters",
+        "published_at": "2026-10-16T18:19:00Z"
+      },
+      {
+        "title": "Oil and regional risk lead the weekend watchlist",
+        "url": "https://www.reuters.com/world/middle-east/oil-lifts-saudi-bourse-egypt-tumbles-regional-tensions-2026-10-18/",
+        "source": "Reuters",
+        "published_at": "2026-10-18T13:51:00Z"
+      },
+      {
+        "title": "Bitcoin steadies after a four-week low",
+        "url": "https://www.barrons.com/livecoverage/stock-market-news-today-101626/card/bitcoin-stabilizes-after-hitting-4-week-low-strategy-hit-by-move-to-exclude-it-from-indexes--UQKqmhnaM8S5ZIvdRmum",
+        "source": "Barron's / Dow Jones Newswires",
+        "published_at": "2026-10-16"
+      }
+    ]
+  }
+}
