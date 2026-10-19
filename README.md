@@ -44,13 +44,15 @@ The web application combines fundamental news and market context alongside revie
 - **Journal-triggered coaching:** [Notion to Tutor workflow](docs/NOTION-TUTOR-TRIGGER.md)
 - **Build sequence:** [Implementation plan](docs/MVP-IMPLEMENTATION-PLAN.md)
 - **Calculation and evidence rules:** [Metrics contract](docs/METRICS-SPEC.md)
-- **Visual reference:** [Terminal wireframe](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site)
+- **Visual reference:** [Working research terminal](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site)
 
 ## Runnable journal application
 
 The first implementation is available at [apps/mt5-journal](apps/mt5-journal/README.md): a local Python web service with native MT5 MCP reads, statement imports, reviewed completed-position metrics, screenshot previews and SQLite daily reviews. Run it on the same PC as MT5. The service restricts access to six data-read tools and keeps the terminal key out of browser code. Actual broker connectivity still requires the local setup and verification described there.
 
-The [hosted journal interface](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site/journal.html) supports imports and evidence downloads. It cannot access a desktop loopback endpoint. The separate research dashboard now has source-linked news snapshots, saved Session Briefings and three enabled pre-session update schedules. Actual scheduled runs and browser visual QA remain unverified. OpenBB is a planned research backend and is not connected; market-price providers and Notion/Discord automation remain unconnected. [Marketaux news snapshots](docs/MARKETAUX-NEWS-INTEGRATION.md) are a separate one-shot adapter with provider access still unverified.
+The [hosted terminal and journal](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site) now have a working research dashboard, source-linked news, Alpha Vantage references, session briefings, reviewed metrics, private journal snapshot save/restore, immutable daily reviews and private screenshot/PDF attachments. Source and setup: [apps/terminal-web](apps/terminal-web/README.md). Daily metrics use the selected Vancouver closing date; the overview uses the separately saved reviewed range. The Asia pre-session snapshot update and readback succeeded. Browser preview workflows and automated financial/access checks passed.
+
+The optional [Alpha Vantage MCP collector](apps/alpha-vantage-feed/README.md) caches references and enforces a persistent request budget. It requires a separately configured private key and has not been exercised against the actual local provider. Hosted references use the existing plugin/pre-session path. OpenBB, DXY/TradingView, exact VWAP/MAE/MFE, automatic OCR, Notion/Discord triggers and real MT5 account connectivity remain unverified or unconnected. [Release details](apps/terminal-web/DASHBOARD-RELEASE.md).
 
 ## Core workflow
 Prepare → Plan → Trade externally → Upload statements and screenshots → Reconcile → Daily analysis → Test one improvement

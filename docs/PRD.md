@@ -1,6 +1,6 @@
 # Gold Research Terminal and Trade Journal MVP
 
-Version 2.5 proposal · 18 October 2026 · Product owner Dennis Eng
+Version 2.6 implementation proposal · 18 October 2026 · Product owner Dennis Eng
 
 ## 1 Product decision
 
@@ -12,11 +12,15 @@ This proposal replaces the course-first launch sequence in the previous PRD. The
 
 ## 2 Current state and evidence
 
-This branch includes the runnable [local MT5 journal](../apps/mt5-journal/README.md): native MCP read transport, CSV/JSON review, deterministic completed-position metrics, SQLite daily reviews and evidence export. Actual broker-account connectivity remains unverified; the hosted interface cannot reach a desktop loopback endpoint.
+The working [Gold Intelligence Terminal](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site) now connects saved source-linked research, Alpha Vantage references, pre-session briefings and a reviewed trade journal. Reproducible source is in [apps/terminal-web](../apps/terminal-web/README.md); the [release note](../apps/terminal-web/DASHBOARD-RELEASE.md) documents implemented behavior and limits.
 
-The separate private [research dashboard](https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site) now serves source-linked news snapshots and Asia/London/New York Session Briefings through shared persistent news storage. Its initial eight stories were sourced directly from Reuters, World Gold Council, BLS, Barron's/Dow Jones and WSJ/Dow Jones. They were not supplied by OpenBB, Marketaux, Eulerpool or MT5. Shared news write/readback was verified, and three pre-session cloud tasks were saved and enabled; scheduled execution has not yet been verified. The Sites-hosted implementation has a separate source repository and is not automatically reproduced by this GitHub checkout.
+The dashboard includes region/topic/asset search, independent observation timestamps, New York timezone-aware ICT windows, Vancouver/New York/UTC display, conditional session preparation, a primary-source directory, and browser-local manual reference plans/pivots. Existing shared news storage and the three pre-session tasks are preserved. The Asia scheduled run has successfully updated and read back a news/briefing snapshot.
 
-OpenBB has not been installed or connected. Marketaux's attempted workspace request returned HTTP 403 without establishing its cause; Eulerpool account/provider access is unverified. MT5 execution/reference feeds, exact MAE/MFE, cloud financial-record ingestion, automated AI coaching, Notion sync and the Discord application remain unimplemented or unverified. Browser visual QA remains unavailable. The dashboard is not OpenBB Workspace or a production-complete terminal.
+The hosted journal supports confirmed CSV/JSON completed-position imports; deterministic net P/L, win rate, profit factor and expectancy; private snapshot saving/restoration; day-scoped append-only reviews; and private PNG/JPEG/WebP/PDF evidence attachments. Server calculations are authoritative over submitted metrics. User namespaces require Sites visitor identity; shared updater tokens cannot read personal journals. Attachments are evidence, not OCR-extracted trades. Original CSV files are not cloud-stored.
+
+The existing read-only MT5 app remains available under apps/mt5-journal. Its real account connectivity still needs local verification. The separate [Alpha Vantage MCP collector](../apps/alpha-vantage-feed/README.md) has persistent cache/budget handling and offline tests; its own key and actual local execution remain to be configured. Hosted provider references continue through the connected plugin's existing pre-session path.
+
+Tests cover original snapshot/MCP contracts, financial denominators, DST, scope, private access, concurrent-write rejection, and attachment ownership. Browser preview checks covered news search, briefing display, sample calculations, private snapshot save/restore and daily review saving. Actual MT5 connectivity, automatic reconciliation, exact MAE/MFE, current DXY, verified VWAP, AI coaching, Notion writeback and Discord notifications are not activated. These remain separately gated production work.
 
 ## 3 First user and outcome
 

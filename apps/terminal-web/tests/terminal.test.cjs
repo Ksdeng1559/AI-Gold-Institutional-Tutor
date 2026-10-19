@@ -1,0 +1,17 @@
+const assert=require('node:assert/strict');const fs=require('node:fs');const vm=require('node:vm');
+const C=require('../public/terminal-core.js');
+assert.equal(C.zonedTime('2026-10-18',20,0,'America/New_York').toISOString(),'2026-10-19T00:00:00.000Z');
+assert.equal(C.zonedTime('2026-11-01',20,0,'America/New_York').toISOString(),'2026-11-02T01:00:00.000Z');
+assert.equal(C.zonedTime('2026-03-08',20,0,'America/New_York').toISOString(),'2026-03-09T00:00:00.000Z');
+assert.throws(()=>C.zonedTime('2026-03-08',2,30,'America/New_York'),/does not exist/);
+let session=C.sessions(new Date('2026-10-18T23:45:00Z'))[0];assert.equal(session.name,'Asia');assert.equal(session.date,'2026-10-18');assert.equal(session.active,false);
+session=C.sessions(new Date('2026-10-19T02:00:00Z'))[0];assert.equal(session.active,true);
+assert.equal(C.sessions(new Date('2026-10-23T20:00:00Z'))[0].date,'2026-10-25');
+assert.equal(C.sessions(new Date('2026-11-02T06:45:00Z'))[0].open.toISOString(),'2026-11-02T07:00:00.000Z');
+assert.equal(C.weekendStart(new Date('2026-10-19T02:00:00Z')).toISOString(),'2026-10-16T20:00:00.000Z');
+assert.deepEqual(C.pivots(110,90,100),{R3:130,R2:120,R1:110,P:100,S1:90,S2:80,S3:70});assert.throws(()=>C.pivots(90,110,100));assert.throws(()=>C.pivots(110,90,120));
+const fixture=[{asset:'Gold',regions:['Asia'],topic:'Demand',title:'Gold reserves',summary:'September',source:'WGC'},{asset:'Crypto',regions:['Global'],topic:'BTC',title:'Bitcoin',summary:'News',source:'DJ'}];assert.equal(C.filterStories(fixture,{region:'Asia'}).length,2);assert.equal(C.filterStories(fixture,{asset:'Gold',query:'September'}).length,1);assert.equal(C.filterStories(fixture,{topic:'Nope'}).length,0);
+assert.deepEqual(C.sparkline([{date:'2026-10-19',net:-20},{date:'2026-10-18',net:50},{date:'2026-10-18',net:-10}]),[0,40,20]);
+const context={module:{exports:{}},Intl,Date,Set,Number};vm.runInNewContext(fs.readFileSync('public/journal.js','utf8'),context);const J=context.module.exports;
+const clean=J.reviewRows(J.parseCSV('id,date,net\nA,2026-10-18,100\nB,2026-10-18,-50\nC,2026-10-18,0'),{id:'id',date:'date',net:'net'},'2026-10-18','2026-10-18');const m=J.metrics(clean);assert.equal(m.net,50);assert.equal(m.winRate,1/3);assert.equal(m.profitFactor,2);assert.equal(m.expectancy,50/3);assert.equal(m.breakevens,1);assert.throws(()=>J.reviewRows([...clean,...clean],{id:'id',date:'date',net:'net'},'2026-10-18','2026-10-18'));assert.equal(J.day('2026-10-18T02:00:00Z'),'2026-10-17');
+console.log('Terminal checks passed: DST session windows, weekend bounds, filters, pivots, daily P/L and journal metrics.');
