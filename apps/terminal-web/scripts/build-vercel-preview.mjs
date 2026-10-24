@@ -1,0 +1,13 @@
+import {cp,mkdir,readFile,writeFile} from 'node:fs/promises';
+const snapshot=JSON.parse(process.env.GOLD_PREVIEW_SNAPSHOT||'null');
+if(!snapshot?.updated_at||!Array.isArray(snapshot.stories))throw Error('A dated research snapshot is required.');
+await mkdir('vercel-dist',{recursive:true});
+await cp('public','vercel-dist',{recursive:true});
+const origin='https://gold-fundamentals-desk-dennis.dennis-klicksmartai.chatgpt.site';
+const banner='<aside role="note" style="padding:14px 24px;background:#332b19;color:#fff0cb;border-bottom:1px solid #766143;font:14px/1.5 system-ui">Vercel preview · Research is a saved copy from '+snapshot.updated_at+'. Scheduled updates and private journal saving continue on the <a style="color:inherit;text-decoration:underline" href="'+origin+'">original terminal</a>. PostgreSQL migration is pending.</aside>';
+let html=await readFile('public/index.html','utf8');
+html=html.replace('<main id="content" tabindex="-1">','<main id="content" tabindex="-1">'+banner).replaceAll('href="journal.html"','href="'+origin+'/journal.html"');
+await writeFile('vercel-dist/index.html',html);
+await writeFile('vercel-dist/snapshot.json',JSON.stringify(snapshot));
+await writeFile('vercel-dist/journal.html','<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Private journal</title><body style="background:#101412;color:#eee;font:18px/1.6 system-ui;padding:40px;max-width:700px"><h1>Your private journal</h1><p>Private saving and existing records remain on the original terminal while PostgreSQL is prepared.</p><p><a style="color:#e6cb8f" href="'+origin+'/journal.html">Open your existing private journal</a></p><p><a style="color:#e6cb8f" href="/">Return to the Vercel preview</a></p></body></html>');
+console.log('Built dated Vercel research preview: '+snapshot.updated_at);
