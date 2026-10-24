@@ -83,6 +83,10 @@ The score measures **entry quality, not probability of winning**.
 - Notion for curriculum/editorial planning
 - GitHub for source, issues, releases and technical docs
 
+## PMF validation build
+
+The proposed **Gold Trader 90** beginner pathway and **Gold Terminal** intermediate-trader experience share one Tutor, journal, and evidence-based assessment engine. The 90-day pathway is a learning and simulation program, **not an income promise**. Product-market fit remains unvalidated; implementation is driven by segmented activation, retention, paid-conversion and safety metrics. See the [PMF contract](docs/PMF-GOLD-TRADER-90.md) and [implementation backlog](docs/PMF-IMPLEMENTATION-BACKLOG.md). Product decisions remain governed by the linked living Notion plan.
+
 ## Project documentation
 - **Living product/course/content plan:** [Notion — Gold Institutional Trading Course + AI Tutor + Content Bible](https://app.notion.com/p/3e19e94cf0a4819bbabcd5b00f722bf7?pvs=204)
 - **Versioned product requirements:** `docs/PRD.md`
