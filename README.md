@@ -26,6 +26,13 @@ An educational XAUUSD application for the **Gold Institutional Trading** methodo
 
 **Maintenance rule:** Do not manually mirror routine Notion edits into this README. Update GitHub when a change affects code, schemas, tests, deployment, security, or another versioned implementation contract.
 
+
+## Gold Terminal Hermes MVO (current paid-pilot scope)
+
+The [Gold Terminal Minimum Viable Offer in Notion](https://app.notion.com/p/4049e94cf0a4819ab4e0ff968446c8a8) governs the evolving **$29/month Gold Terminal Pro** offer, scope and validation criteria. The versioned [Hermes / Discord / Journal implementation PRD](docs/HERMES-GOLD-TERMINAL-MVO.md) defines the minimum technical contracts for a paid pilot: pre-Asia/London/NY briefings, private screenshot analysis using a vision-capable model, explicit journal saving, quotas, permissions, and reporting.
+
+**Scope distinction:** The tutor/course feature inventory and scoring specifications below describe broader long-term education capabilities. They are **not launch requirements** for the Hermes MVO. Jev, automatic volume-profile extraction, automated brokerage syncing, autonomous trade execution and moderator setup distribution are excluded or deferred. Moderator strategies stay proprietary and outside Hermes ingestion. Do not consider any described integration deployed merely because it appears in this repository.
+
 ## Product goal
 Teach traders to classify session context, evaluate **entry quality**, review screenshots, improve execution behaviour, and journal decisions independently of P&L.
 
